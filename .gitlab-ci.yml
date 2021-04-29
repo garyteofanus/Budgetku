@@ -1,0 +1,33 @@
+image: gradle:6.8.3-jdk11
+
+variables:
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+
+before_script:
+  - export GRADLE_USER_HOME=`pwd`/.gradle
+
+stages:
+  - test
+
+test:auth:
+  stage:test
+  script:
+    - gradle check
+    - gradle jacocoTestReport
+    - grep -Eo "Total.*?([0–9]{1,3})%" build/jacocoHtml/index.html
+  services:
+    - "postgres:latest"
+  variables:
+    DATABASE_URL: jdbc:postgresql://postgres:5432/postgres
+    POSTGRES_USER: postgres
+    POSTGRES_DB: postgres
+    POSTGRES_PASSWORD: postgres
+    SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/postgres
+    SPRING_DATASOURCE_USER: postgres
+    SPRING_DATASOURCE_PASSWORD: postgres
+
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    paths:
+      - $GRADLE_USER_HOME/wrapper
+      - $GRADLE_USER_HOME/caches
