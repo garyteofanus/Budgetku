@@ -4,7 +4,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "user_budget",  uniqueConstraints = @UniqueConstraint(columnNames = "email"))
@@ -39,6 +41,9 @@ public class User {
 
     private Collection<Role> roles;
 
+    @OneToMany(mappedBy = "user")
+    private List<Budget> budgetList;
+
     public User(String firstName, String lastName, String email, String password, Collection < Role > roles) {
         super();
         this.firstName = firstName;
@@ -46,5 +51,6 @@ public class User {
         this.email = email;
         this.password = password;
         this.roles = roles;
+        this.budgetList = new ArrayList<>();
     }
 }
