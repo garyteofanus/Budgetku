@@ -10,7 +10,7 @@ stages:
   - test
 
 test:auth:
-  stage:test
+  stage: test
   script:
     - gradle check
     - gradle jacocoTestReport
