@@ -6,10 +6,10 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "budget")
+@Table(name = "category")
 @Data
 @NoArgsConstructor
-public class Budget {
+public class Category {
 
     @Id
     @Column(name = "id", updatable = false, nullable = false)
@@ -20,20 +20,14 @@ public class Budget {
     @JoinColumn(name="email")
     private User user;
 
-    @Column(name = "category")
-    private String category;
+    @Column(name = "category_name")
+    private String categoryName;
 
     @Column(name = "description")
     private String description;
 
-    @Column(name = "budget")
-    private int budget;
-
-    @Column(name = "sisa_budget")
-    private int sisaBudget;
-
-    public Budget(String category, String description, User user) {
-        this.category = category;
+    public Category(String categoryName, String description, User user) {
+        this.categoryName = categoryName;
         this.description = description;
         this.user = user;
     }
