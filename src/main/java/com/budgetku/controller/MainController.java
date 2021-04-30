@@ -15,4 +15,9 @@ public class MainController {
     public String home() {
         return "index";
     }
+
+    @GetMapping("/budget-limiter")
+    public String budgetLimiter() {
+        return "budgetLimiter/index.html";
+    }
 }
