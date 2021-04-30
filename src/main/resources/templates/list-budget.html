@@ -16,10 +16,12 @@
             </ul>
         </div>
     </nav>
-    <div class="border" th:each="budget:${budgetList}">
-        <h2 th:text="${budget[0]}"></h2>
-        <h2 th:text="${budget[1]}"></h2>
-        <h2 th:text="${budget[2]}"></h2>
+    <h1 class="m-5 text-center">List Budget</h1>
+    <div class="mx-5 px-5 py-3" th:each="budget:${budgetList}">
+        <h3 th:text="${budget[0]}"></h3>
+        <hr>
+        <h5 th:text="${budget[1]}"></h5>
+        <p th:text="${budget[2]}"></p>
     </div>
 </body>
 </html>
