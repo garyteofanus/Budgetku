@@ -4,6 +4,7 @@
 [![pipeline status](https://gitlab.com/budgetku/budgetku/badges/master/pipeline.svg)](https://gitlab.com/budgetku/budgetku/-/commits/master)
 [![coverage report](https://gitlab.com/budgetku/budgetku/badges/master/coverage.svg)](ttps://gitlab.com/budgetku/budgetku/-/commits/master)
 
+### Pembagian 
 
 | Nama                         | NPM        | Bagian              |
 |------------------------------|------------|---------------------|
@@ -12,3 +13,6 @@
 | Rafi Indrawan Dirgantara     | 1906350824 | Dana Keluar         |
 | Nabila Dita Putri            | 1906400085 | Kategori            |
 | Teofanus Gary Setiawan       | 1906400160 | Budget Limiter      |
+
+### Database Relationship
+![dbschema.png](static/img/dbschema.png)
