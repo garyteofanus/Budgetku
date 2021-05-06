@@ -1,10 +1,12 @@
 package com.budgetku.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "user_budget",  uniqueConstraints = @UniqueConstraint(columnNames = "email"))
@@ -28,6 +30,10 @@ public class User {
 
     @Column(name = "password")
     private String password;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @JsonIgnore
+    private List<DanaKeluar> danaKeluarList;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
