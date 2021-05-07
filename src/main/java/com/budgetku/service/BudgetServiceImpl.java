@@ -4,14 +4,12 @@ import com.budgetku.repository.BudgetRepository;
 
 import com.budgetku.model.Budget;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class BudgetServiceImpl implements BudgetService {
 
-    @Autowired
-    private BudgetRepository budgetRepository;
+    private final BudgetRepository budgetRepository;
 
     public BudgetServiceImpl(BudgetRepository budgetRepository){
         this.budgetRepository = budgetRepository;
