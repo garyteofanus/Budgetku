@@ -32,4 +32,9 @@ public class MainController {
         model.addAttribute("budgetList", dummyBudget);
         return "list-budget";
     }
+
+    @GetMapping("/budget-limiter")
+    public String budgetLimiter() {
+        return "budgetLimiter/index.html";
+    }
 }
