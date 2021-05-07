@@ -30,11 +30,6 @@ public class BudgetServiceImpl implements BudgetService {
     }
 
     @Override
-    public Budget getBudgetById(int id) {
-        return budgetRepository.findById(id);
-    }
-
-    @Override
     public Budget updateBudget(int id) {
         return null;
     }
@@ -46,7 +41,7 @@ public class BudgetServiceImpl implements BudgetService {
 
     @Override
     public String getSummary() {
-        return null;
+        return "Summary";
     }
 }
 

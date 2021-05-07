@@ -39,11 +39,7 @@ public class BudgetController {
 
     @GetMapping("/list-budget")
     public String listBudget(Model model) {
-//        List<Budget> dummyBudget = new ArrayList<>();
-//        dummyBudget.add(new Budget(100000, LocalDateTime.parse("2021-05-03T00:00:00"), "Budget makanan"));
-//        dummyBudget.add(new Budget(30000, LocalDateTime.parse("2021-05-04T00:00:00"), "Budget obat"));
-//        dummyBudget.add(new Budget(50000, LocalDateTime.parse("2021-05-05T00:00:00"), "Budget transport"));\
-//        model.addAttribute("budgetList", dummyBudget);
+        model.addAttribute("budgetList", budgetService.getListBudget());
         return "list-budget";
     }
 }
