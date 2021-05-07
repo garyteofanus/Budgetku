@@ -36,4 +36,11 @@ public class Budget {
         this.tanggal = tanggal;
         this.deskripsi = deskripsi;
     }
+
+    // Observer Subscriber's update method called from DanaKeluarService
+    public void update(int id, DanaKeluar danaKeluar) {
+        if (this.id == id) {
+            this.nominal -= danaKeluar.getNominal();
+        }
+    }
 }
