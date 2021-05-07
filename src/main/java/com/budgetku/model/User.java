@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -38,6 +40,7 @@ public class User {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     @JsonIgnore
     private List<Kategori> kategoriList;
+    private List<Budget> budgetList;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
@@ -56,5 +59,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.roles = roles;
+        this.kategoriList = new ArrayList<>();
+        this.budgetList = new ArrayList<>();
     }
 }

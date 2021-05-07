@@ -1,9 +1,8 @@
 package com.budgetku.service;
 
-import com.budgetku.repository.BudgetRepository;
-
 import com.budgetku.model.Budget;
-
+import com.budgetku.repository.BudgetRepository;
+import com.budgetku.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +10,12 @@ import org.springframework.stereotype.Service;
 public class BudgetServiceImpl implements BudgetService {
 
     @Autowired
-    private BudgetRepository budgetRepository;
+    private final BudgetRepository budgetRepository;
 
-    public BudgetServiceImpl(BudgetRepository budgetRepository){
+    @Autowired
+    private UserRepository userRepository;
+
+    public BudgetServiceImpl(BudgetRepository budgetRepository) {
         this.budgetRepository = budgetRepository;
     }
 
@@ -23,8 +25,8 @@ public class BudgetServiceImpl implements BudgetService {
     }
 
     @Override
-    public Budget getBudgetById(int id) {
-        return budgetRepository.findById(id);
+    public void createBudget(Budget budget) {
+        budgetRepository.save(budget);
     }
 
     @Override
@@ -39,7 +41,7 @@ public class BudgetServiceImpl implements BudgetService {
 
     @Override
     public String getSummary() {
-        return null;
+        return "Summary";
     }
 }
 
