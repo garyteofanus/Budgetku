@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -49,6 +50,9 @@ public class User {
 
     private Collection<Role> roles;
 
+    @OneToMany(mappedBy = "user")
+    private List<Category> categoryList;
+
     public User(String firstName, String lastName, String email, String password, Collection < Role > roles) {
         super();
         this.firstName = firstName;
@@ -56,5 +60,6 @@ public class User {
         this.email = email;
         this.password = password;
         this.roles = roles;
+        this.categoryList = new ArrayList<>();
     }
 }
