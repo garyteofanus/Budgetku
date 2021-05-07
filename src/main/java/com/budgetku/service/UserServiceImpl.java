@@ -22,11 +22,8 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
+    @Autowired
     private UserRepository userRepository;
-
-    public UserServiceImpl(UserRepository userRepository){
-        this.userRepository = userRepository;
-    }
 
     @Override
     public User save(UserRegistrationDto registrationDto) {
@@ -38,6 +35,11 @@ public class UserServiceImpl implements UserService{
                 Collections.singletonList(new Role("ROLE_USER"))
         );
         return userRepository.save(user);
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
     @Override
