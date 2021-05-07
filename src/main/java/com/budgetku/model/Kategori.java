@@ -12,19 +12,19 @@ import javax.persistence.*;
 public class Kategori {
 
     @Id
-    @Column(name = "id", updatable = false, nullable = false)
+    @Column(name = "id_kategori", updatable = false, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @ManyToOne
-    @JoinColumn(name="email")
-    private User user;
+    private long idKategori;
 
     @Column(name = "namaKategori")
     private String namaKategori;
 
     @Column(name = "deskripsi")
     private String deskripsi;
+
+    @ManyToOne
+    @JoinColumn(name="user_budget")
+    private User user;
 
     public Kategori(String namaKategori, String deskripsi, User user) {
         this.namaKategori = namaKategori;
@@ -33,11 +33,7 @@ public class Kategori {
     }
 
     public long getId() {
-        return id;
-    }
-
-    public User getUser(){
-        return user;
+        return idKategori;
     }
 
     public String getNamaKategori(){
@@ -48,4 +44,7 @@ public class Kategori {
         return deskripsi;
     }
 
+    public User getUser(){
+        return user;
+    }
 }
