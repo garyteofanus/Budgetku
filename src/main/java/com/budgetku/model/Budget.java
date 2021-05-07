@@ -6,13 +6,12 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Entity
-@Table(name = "dana_keluar")
+@Table(name = "budget")
 @Data
 @NoArgsConstructor
-public class DanaKeluar {
+public class Budget {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,20 +31,9 @@ public class DanaKeluar {
     @JoinColumn(name = "user_budget")
     private User user;
 
-    public DanaKeluar(Integer nominal, LocalDateTime tanggal, String deskripsi, User user){
-        super();
+    public Budget(Integer nominal, LocalDateTime tanggal, String deskripsi) {
         this.nominal = nominal;
         this.tanggal = tanggal;
         this.deskripsi = deskripsi;
-        this.user = user;
-    }
-
-    public DanaKeluar(Integer nominal, String tanggal, String deskripsi, User user){
-        this(
-                nominal,
-                LocalDateTime.parse(tanggal, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")),
-                deskripsi,
-                user
-        );
     }
 }

@@ -7,7 +7,7 @@ public interface KategoriService {
 
     Iterable<Kategori> getListKategoriByUser(User user);
 
-    Kategori createKategori(String namaKategori, String deskripsi, User user);
+    Kategori createKategori(String namaKategori, String deskripsi, String userEmail);
 
     void deleteKategori(long idKategori);
 }
