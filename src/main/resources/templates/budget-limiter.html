@@ -35,7 +35,7 @@
 
             <h1>Budget Limiter</h1>
 
-            <form method="post" th:action="@{/add-budget}" th:object="${budget}">
+            <form method="post" th:action="@{/budget/add-budget}" th:object="${budget}">
                 <div class="form-group">
                     <label class="control-label" for="nominal"> Nominal </label>
                     <input autofocus="autofocus" class="form-control" id="nominal"
@@ -44,14 +44,25 @@
 
                 <div class="form-group">
                     <label class="control-label" for="date"> Tanggal </label>
-                    <input autofocus="autofocus" class="form-control" id="date"
+                    <input autofocus="autofocus" class="form-control" id="date" type="date"
                            required th:field="*{tanggal}"/>
                 </div>
 
+                <!--                <div class="form-group">-->
+                <!--                    <label class="control-label" for="category"> Kategori </label>-->
+                <!--                    <select class="form-control" id="category" th:field="*{categoryList}" multiple>-->
+                <!--                        <option th:each="category : ${categories}"-->
+                <!--                                th:field="*{categoryList}"-->
+                <!--                                th:value="${{category}}"-->
+                <!--                                th:text="${category}">-->
+                <!--                        </option>-->
+                <!--                    </select>-->
+                <!--                </div>-->
+
                 <div class="form-group">
                     <label class="control-label" for="description"> Deskripsi </label>
-                    <input autofocus="autofocus" class="form-control" id="description"
-                           required th:field="*{deskripsi}"/>
+                    <textarea autofocus="autofocus" class="form-control" id="description"
+                              required th:field="*{deskripsi}"></textarea>
                 </div>
 
                 <div class="form-group">

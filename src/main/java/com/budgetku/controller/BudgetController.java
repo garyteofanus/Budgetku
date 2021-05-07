@@ -23,9 +23,12 @@ public class BudgetController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/")
+    @GetMapping("")
     public String budgetLimiter(Model model) {
         model.addAttribute("budget", new Budget());
+
+        String[] categories = {"Category 1", "Category 2"};
+        model.addAttribute("categories", categories);
         return "budget-limiter.html";
     }
 
@@ -33,7 +36,7 @@ public class BudgetController {
     public String addBudget(@ModelAttribute Budget budget) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userEmail = authentication.getName();
-        budgetService.createBudget(budget);
-        return "redirect:/budget-limiter?success";
+        budgetService.createBudget(budget, userEmail);
+        return "redirect:/budget";
     }
 }
