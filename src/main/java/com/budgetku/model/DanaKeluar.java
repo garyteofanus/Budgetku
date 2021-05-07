@@ -32,18 +32,20 @@ public class DanaKeluar {
     @JoinColumn(name = "user_budget")
     private User user;
 
-    public DanaKeluar(Integer nominal, LocalDateTime tanggal, String deskripsi){
+    public DanaKeluar(Integer nominal, LocalDateTime tanggal, String deskripsi, User user){
         super();
         this.nominal = nominal;
         this.tanggal = tanggal;
         this.deskripsi = deskripsi;
+        this.user = user;
     }
 
-    public DanaKeluar(Integer nominal, String tanggal, String deskripsi){
+    public DanaKeluar(Integer nominal, String tanggal, String deskripsi, User user){
         this(
                 nominal,
                 LocalDateTime.parse(tanggal, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")),
-                deskripsi
+                deskripsi,
+                user
         );
     }
 }
