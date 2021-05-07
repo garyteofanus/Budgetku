@@ -1,13 +1,9 @@
 package com.budgetku.controller;
 
-import com.budgetku.model.User;
 import com.budgetku.service.DanaKeluarService;
-import com.budgetku.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/danakeluar")
 public class DanaKeluarController {
 
-    @Autowired
-    private DanaKeluarService danaKeluarService;
+    private final DanaKeluarService danaKeluarService;
 
-    @Autowired
-    private UserService userService;
+    public DanaKeluarController(DanaKeluarService danaKeluarService) {
+        this.danaKeluarService = danaKeluarService;
+    }
 
     @GetMapping
     public String showDanaKeluarForm(){

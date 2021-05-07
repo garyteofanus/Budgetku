@@ -10,11 +10,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class DanaKeluarServiceImpl implements DanaKeluarService {
 
-    @Autowired
-    private DanaKeluarRepository danaKeluarRepository;
+    private final DanaKeluarRepository danaKeluarRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public DanaKeluarServiceImpl(DanaKeluarRepository danaKeluarRepository, UserRepository userRepository) {
+        this.danaKeluarRepository = danaKeluarRepository;
+        this.userRepository = userRepository;
+    }
 
     @Override
     public DanaKeluar createDanaKeluar(Integer nominal, String tanggal, String deskripsi, String userEmail) {

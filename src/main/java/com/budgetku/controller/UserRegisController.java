@@ -1,11 +1,7 @@
 package com.budgetku.controller;
 
 import com.budgetku.dto.UserRegistrationDto;
-import com.budgetku.model.User;
-import com.budgetku.repository.UserRepository;
 import com.budgetku.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/register")
 public class UserRegisController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    public UserRegisController(UserService userService) {
+        this.userService = userService;
+    }
 
     @ModelAttribute("user")
     public UserRegistrationDto userRegistrationDto() {
