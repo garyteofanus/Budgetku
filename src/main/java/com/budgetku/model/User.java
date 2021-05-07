@@ -35,6 +35,10 @@ public class User {
     @JsonIgnore
     private List<DanaKeluar> danaKeluarList;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @JsonIgnore
+    private List<Budget> budgetList;
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_roles",
