@@ -1,9 +1,16 @@
+package com.budgetku.service;
+
+import com.budgetku.repository.BudgetRepository;
+
+import com.budgetku.model.Budget;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class BudgetServiceImpl implements BudgetService {
 
+    @Autowired
     private BudgetRepository budgetRepository;
 
     public BudgetServiceImpl(BudgetRepository budgetRepository){
@@ -12,12 +19,12 @@ public class BudgetServiceImpl implements BudgetService {
 
     @Override
     public Iterable<Budget> getListBudget() {
-        return null;
+        return budgetRepository.findAll();
     }
 
     @Override
     public Budget getBudgetById(int id) {
-        return null;
+        return budgetRepository.findById(id);
     }
 
     @Override
@@ -27,12 +34,13 @@ public class BudgetServiceImpl implements BudgetService {
 
     @Override
     public void deleteBudgetById(int id) {
-        return null;
+        budgetRepository.deleteById(id);
     }
 
     @Override
     public String getSummary() {
         return null;
     }
+}
 
     

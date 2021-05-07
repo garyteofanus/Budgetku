@@ -1,7 +1,10 @@
 package com.budgetku.controller;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.budgetku.model.Budget;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,13 +25,11 @@ public class MainController {
 
     @GetMapping("/list-budget")
     public String listBudget(Model model) {
-        // Should contain Budget model objects, not yet made
-        List<String[]> dummyBudget = new ArrayList<>();
-        dummyBudget.add(new String[]{"Makanan", "200.000", "Budget makanan bulanan"});
-        dummyBudget.add(new String[]{"Pulsa", "50.000", "Budget pulsa bulanan"});
-        dummyBudget.add(new String[]{"Belanja", "100.000", "Budget belanja online bulanan"});
-        dummyBudget.add(new String[]{"Obat", "30.000", "Budget obat bulanan"});
-        dummyBudget.add(new String[]{"Transport", "100.000", "Budget transport bulanan"});
+        List<Budget> dummyBudget = new ArrayList<>();
+        dummyBudget.add(new Budget(100000, LocalDateTime.parse("2021-05-03T00:00:00"), "Budget makanan"));
+        dummyBudget.add(new Budget(30000, LocalDateTime.parse("2021-05-04T00:00:00"), "Budget obat"));
+        dummyBudget.add(new Budget(50000, LocalDateTime.parse("2021-05-05T00:00:00"), "Budget transport"));
+
         model.addAttribute("budgetList", dummyBudget);
         return "list-budget";
     }

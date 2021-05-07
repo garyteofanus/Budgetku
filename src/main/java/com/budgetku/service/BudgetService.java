@@ -1,5 +1,7 @@
 package com.budgetku.service;
 
+import com.budgetku.model.Budget;
+
 public interface BudgetService {
     Iterable<Budget> getListBudget();
     Budget getBudgetById(int id);
