@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "category")
@@ -17,7 +18,7 @@ public class Category {
     private long id;
 
     @ManyToOne
-    @JoinColumn(name="email")
+    @JoinColumn(name = "email")
     private User user;
 
     @Column(name = "category_name")
@@ -25,6 +26,9 @@ public class Category {
 
     @Column(name = "description")
     private String description;
+
+    @ManyToMany(mappedBy = "categoryList")
+    private List<Budget> budgetList;
 
     public Category(String categoryName, String description, User user) {
         this.categoryName = categoryName;

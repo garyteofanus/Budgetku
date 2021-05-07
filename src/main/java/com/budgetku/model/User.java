@@ -61,5 +61,6 @@ public class User {
         this.password = password;
         this.roles = roles;
         this.categoryList = new ArrayList<>();
+        this.budgetList = new ArrayList<>();
     }
 }
