@@ -1,6 +1,6 @@
 package com.budgetku.controller;
 
-
+import com.budgetku.service.BudgetService;
 import com.budgetku.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,18 +12,25 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
-@WebMvcTest(controllers = UserRegisController.class)
-public class UserRegisControllerTest {
-
+@WebMvcTest(controllers = BudgetController.class)
+public class BudgetControllerTest {
+    @MockBean
+    UserService userService;
+    @MockBean
+    BudgetService budgetService;
     @Autowired
     private MockMvc mvc;
 
-    @MockBean
-    UserService userService;
-
     @Test
-    public void testGetMappingShouldReturnRegistrationForm() throws Exception {
-        this.mvc.perform(get("/register")).andDo(print()).andExpect(status().isOk());
+    public void testGetBudgetShouldBeFound() throws Exception {
+        this.mvc.perform(get("/budget")).andDo(print()).andExpect(status().isFound());
     }
+
+
+//    @Test
+//    public void testGetBudgetStatusShouldRedirectWhenNotLoggedIn() throws Exception {
+//        User user = new User()
+//        Budget budget = new Budget("Zaphod", "zaphod@galaxy.net");
+//        // this.mvc.perform(get("/budget/")).andDo(print()).andExpect(status().isOk());
+//    }
 }
