@@ -4,7 +4,6 @@ import com.budgetku.dto.UserRegistrationDto;
 import com.budgetku.model.Role;
 import com.budgetku.model.User;
 import com.budgetku.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,11 +18,14 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl implements UserService{
 
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public UserServiceImpl(BCryptPasswordEncoder passwordEncoder, UserRepository userRepository) {
+        this.passwordEncoder = passwordEncoder;
+        this.userRepository = userRepository;
+    }
 
     @Override
     public User save(UserRegistrationDto registrationDto) {
@@ -35,11 +37,6 @@ public class UserServiceImpl implements UserService{
                 Collections.singletonList(new Role("ROLE_USER"))
         );
         return userRepository.save(user);
-    }
-
-    @Override
-    public User getUserByEmail(String email) {
-        return userRepository.findByEmail(email);
     }
 
     @Override

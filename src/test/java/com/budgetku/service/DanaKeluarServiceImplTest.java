@@ -47,7 +47,6 @@ public class DanaKeluarServiceImplTest {
                 "sebuah deskripsi",
                 "email@mail.com"
         );
-        DanaKeluar danaKeluar = danaKeluarRepository.getOne(1L);
         Assertions.assertTrue(true);
     }
 }
