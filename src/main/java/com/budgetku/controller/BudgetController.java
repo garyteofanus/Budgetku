@@ -39,4 +39,10 @@ public class BudgetController {
         budgetService.createBudget(budget, userEmail);
         return "redirect:/budget";
     }
+
+    @GetMapping("/list-budget")
+    public String listBudget(Model model) {
+        model.addAttribute("budgetList", budgetService.getListBudget());
+        return "list-budget";
+    }
 }
