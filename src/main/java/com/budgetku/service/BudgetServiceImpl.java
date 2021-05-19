@@ -6,7 +6,7 @@ import com.budgetku.repository.BudgetRepository;
 import com.budgetku.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+// Added
 @Service
 public class BudgetServiceImpl implements BudgetService {
 

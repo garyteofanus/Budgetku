@@ -36,7 +36,7 @@ public class Budget {
             joinColumns = @JoinColumn(name = "budget_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id")
     )
-    private List<Kategori> categoryList;
+    private List<Kategori> kategoriList;
 
     @ManyToOne
     @JoinColumn(name = "user_budget")
@@ -57,4 +57,11 @@ public class Budget {
 //                user
 //        );
 //    }
+
+    // Observer Subscriber's update method called from DanaKeluarService
+    public void update(int id, DanaKeluar danaKeluar) {
+        if (this.id == id) {
+            this.nominal -= danaKeluar.getNominal();
+        }
+    }
 }
