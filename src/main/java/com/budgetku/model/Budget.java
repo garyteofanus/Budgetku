@@ -36,7 +36,7 @@ public class Budget {
             joinColumns = @JoinColumn(name = "budget_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id")
     )
-    private List<Kategori> kategoriList;
+    private List<Category> categoryList;
 
     @ManyToOne
     @JoinColumn(name = "user_budget")
