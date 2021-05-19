@@ -26,10 +26,10 @@ public class BudgetServiceImpl implements BudgetService {
     }
 
     @Override
-    public void createBudget(Budget budget, String userEmail) {
+    public Budget createBudget(Budget budget, String userEmail) {
         User pengguna = userRepository.findByEmail(userEmail);
         budget.setUser(pengguna);
-        budgetRepository.save(budget);
+        return budgetRepository.save(budget);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class BudgetServiceImpl implements BudgetService {
 
     @Override
     public String getSummary() {
-        return null;
+        return "Summary";
     }
 }
 

@@ -2,6 +2,7 @@ package com.budgetku.controller;
 
 import com.budgetku.service.BudgetService;
 import com.budgetku.service.UserService;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -12,25 +13,29 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(controllers = BudgetController.class)
+
+@WebMvcTest(controllers = MainController.class)
 public class BudgetControllerTest {
-    @MockBean
-    UserService userService;
-    @MockBean
-    BudgetService budgetService;
+
     @Autowired
     private MockMvc mvc;
 
+    @MockBean
+    UserService userService;
+
+    @MockBean
+    BudgetService budgetService;
+
     @Test
-    public void testGetBudgetShouldBeFound() throws Exception {
-        this.mvc.perform(get("/budget")).andDo(print()).andExpect(status().isFound());
+    public void testGetBudgetStatusShouldRedirectWhenNotLoggedIn() throws Exception {
+        this.mvc.perform(get("/budget/")).andDo(print()).andExpect(status().isFound());
+        // this.mvc.perform(get("/budget/")).andDo(print()).andExpect(status().isOk());
     }
 
-
-//    @Test
-//    public void testGetBudgetStatusShouldRedirectWhenNotLoggedIn() throws Exception {
-//        User user = new User()
-//        Budget budget = new Budget("Zaphod", "zaphod@galaxy.net");
-//        // this.mvc.perform(get("/budget/")).andDo(print()).andExpect(status().isOk());
-//    }
+    @Test
+    public void testGetListBudgetStatusShouldRedirectWhenNotLoggedIn() throws Exception {
+        this.mvc.perform(get("/budget/list-budget")).andDo(print()).andExpect(status().isFound());
+        // this.mvc.perform(get("/budget/list-budget")).andDo(print()).andExpect(status().isOk());
+    }
 }
+
