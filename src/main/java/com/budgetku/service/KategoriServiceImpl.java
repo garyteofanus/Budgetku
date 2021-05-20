@@ -16,7 +16,8 @@ public class KategoriServiceImpl implements KategoriService{
     private UserRepository UserRepository;
 
     @Override
-    public Iterable<Kategori> getListKategoriByUser(User user) {
+    public Iterable<Kategori> getListKategoriByUser(String userEmail) {
+        User user = UserRepository.findByEmail(userEmail);
         return kategoriRepository.findByUser(user);
     }
 
