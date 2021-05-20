@@ -13,11 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -56,7 +52,7 @@ public class KategoriServiceImplTest {
     @Test
     public void testServiceGetListKategoriByUser(){
         Iterable<Kategori> listKategori = kategoriRepository.findByUser(user);
-        lenient().when(kategoriService.getListKategoriByUser(user.getEmail())).thenReturn(listKategori);
+        when(kategoriService.getListKategoriByUser(user.getEmail())).thenReturn(listKategori);
         Iterable<Kategori> listKategoriResult = kategoriService.getListKategoriByUser(user.getEmail());
         Assertions.assertIterableEquals(listKategori, listKategoriResult);
     }
