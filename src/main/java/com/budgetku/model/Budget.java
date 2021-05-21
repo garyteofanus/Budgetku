@@ -6,6 +6,9 @@ import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+
+import com.budgetku.core.budgetkuobserver.DanaKeluarPublisher;
+
 import java.util.Date;
 import java.util.List;
 
@@ -47,21 +50,5 @@ public class Budget {
         this.tanggal = tanggal;
         this.deskripsi = deskripsi;
         this.user = user;
-    }
-
-//    public Budget(Long nominal, String tanggal, String deskripsi, User user) {
-//        this(
-//                nominal,
-//                Date.parse(tanggal, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")),
-//                deskripsi,
-//                user
-//        );
-//    }
-
-    // Observer Subscriber's update method called from DanaKeluarService
-    public void update(int id, DanaKeluar danaKeluar) {
-        if (this.id == id) {
-            this.nominal -= danaKeluar.getNominal();
-        }
     }
 }

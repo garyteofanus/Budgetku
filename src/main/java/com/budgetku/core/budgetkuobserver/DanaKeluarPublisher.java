@@ -4,6 +4,9 @@ import com.budgetku.model.DanaKeluar;
 
 import java.util.ArrayList;
 
+// import org.springframework.stereotype.Component;
+
+// @Component
 public class DanaKeluarPublisher {
     private ArrayList<DanaKeluarSubscriber> subscribers = new ArrayList<>();
     private DanaKeluar danaKeluar;
@@ -14,6 +17,7 @@ public class DanaKeluarPublisher {
 
     public void addDanaKeluar(DanaKeluar danaKeluar){
         this.danaKeluar = danaKeluar;
+        notifySubscriber();
     }
 
     public DanaKeluar getDanaKeluar() {
