@@ -1,7 +1,9 @@
 package com.budgetku.controller;
 
 import com.budgetku.model.Budget;
+import com.budgetku.model.Kategori;
 import com.budgetku.service.BudgetService;
+import com.budgetku.service.KategoriService;
 import com.budgetku.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -23,11 +25,17 @@ public class BudgetController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private KategoriService kategoriService;
+
     @GetMapping("")
     public String budgetLimiter(Model model) {
         model.addAttribute("budget", new Budget());
 
-        String[] categories = {"Category 1", "Category 2"};
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userEmail = authentication.getName();
+
+        Iterable<Kategori> categories = kategoriService.getListKategoriByUser(userEmail);
         model.addAttribute("categories", categories);
         return "budget-limiter.html";
     }
