@@ -51,7 +51,7 @@ public class User {
     private Collection<Role> roles;
 
     @OneToMany(mappedBy = "user")
-    private List<Category> categoryList;
+    private List<Kategori> kategoriList;
 
     public User(String firstName, String lastName, String email, String password, Collection < Role > roles) {
         super();
@@ -60,7 +60,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.roles = roles;
-        this.categoryList = new ArrayList<>();
+        this.kategoriList = new ArrayList<>();
         this.budgetList = new ArrayList<>();
     }
 }
