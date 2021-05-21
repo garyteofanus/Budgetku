@@ -1,4 +1,4 @@
-package com.budgetku.model;
+package com.budgetku.budgetState;
 
 public interface BudgetState {
     String getSummary();

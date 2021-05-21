@@ -1,5 +1,7 @@
 package com.budgetku.model;
 
+import com.budgetku.budgetState.BudgetState;
+import com.budgetku.budgetState.NormalBudgetState;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -42,11 +44,14 @@ public class Budget {
     @JoinColumn(name = "user_budget")
     private User user;
 
+    private BudgetState state;
+
     public Budget(Long nominal, Date tanggal, String deskripsi, User user) {
         this.nominal = nominal;
         this.tanggal = tanggal;
         this.deskripsi = deskripsi;
         this.user = user;
+        this.state = new NormalBudgetState();
     }
 
     // Observer Subscriber's update method called from DanaKeluarService
@@ -54,5 +59,9 @@ public class Budget {
         if (this.id == id) {
             this.nominal -= danaKeluar.getNominal();
         }
+    }
+
+    public void changeState(BudgetState newState) {
+        this.state = newState;
     }
 }

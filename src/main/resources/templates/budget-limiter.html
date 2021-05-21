@@ -48,16 +48,18 @@
                            required th:field="*{tanggal}"/>
                 </div>
 
-                <!--                <div class="form-group">-->
-                <!--                    <label class="control-label" for="category"> Kategori </label>-->
-                <!--                    <select class="form-control" id="category" th:field="*{categoryList}" multiple>-->
-                <!--                        <option th:each="category : ${categories}"-->
-                <!--                                th:field="*{categoryList}"-->
-                <!--                                th:value="${{category}}"-->
-                <!--                                th:text="${category}">-->
-                <!--                        </option>-->
-                <!--                    </select>-->
-                <!--                </div>-->
+                <div class="form-group">
+                    <label class="control-label" for="category"> Kategori </label>
+                    <div th:each="category: ${categories}">
+                        <h1 th:text="${category.namaKategori}"></h1>
+                    </div>
+                    <select class="form-control" id="category" multiple>
+                        <option th:each="category : ${categories}"
+                                th:value="${category.namaKategori}"
+                                th:text="${category.namaKategori}">
+                        </option>
+                    </select>
+                </div>
 
                 <div class="form-group">
                     <label class="control-label" for="description"> Deskripsi </label>
