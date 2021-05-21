@@ -5,7 +5,7 @@ import com.budgetku.model.User;
 
 public interface KategoriService {
 
-    Iterable<Kategori> getListKategoriByUser(User user);
+    Iterable<Kategori> getListKategoriByUser(String userEmail);
 
     Kategori createKategori(String namaKategori, String deskripsi, String userEmail);
 

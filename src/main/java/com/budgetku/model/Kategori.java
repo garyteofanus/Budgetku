@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "kategori")
@@ -25,6 +26,9 @@ public class Kategori {
     @ManyToOne
     @JoinColumn(name="user_budget")
     private User user;
+
+    @ManyToMany(mappedBy = "kategoriList")
+    private List<Budget> budgetList;
 
     public Kategori(String namaKategori, String deskripsi, User user) {
         this.namaKategori = namaKategori;

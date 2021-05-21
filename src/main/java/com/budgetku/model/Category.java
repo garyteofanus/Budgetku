@@ -27,8 +27,8 @@ public class Category {
     @Column(name = "description")
     private String description;
 
-    @ManyToMany(mappedBy = "categoryList")
-    private List<Budget> budgetList;
+//    @ManyToMany(mappedBy = "categoryList")
+//    private List<Budget> budgetList;
 
     public Category(String categoryName, String description, User user) {
         this.categoryName = categoryName;
