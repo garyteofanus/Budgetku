@@ -34,7 +34,7 @@ public class Budget {
     @JoinTable(
             name = "budget_kategori",
             joinColumns = @JoinColumn(name = "budget_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "kategori_id", referencedColumnName = "id")
+            inverseJoinColumns = @JoinColumn(name = "kategori_id", referencedColumnName = "id_kategori")
     )
     private List<Kategori> kategoriList;
 
