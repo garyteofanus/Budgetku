@@ -13,7 +13,8 @@ public class DanaKeluarServiceImpl implements DanaKeluarService {
 
     private final DanaKeluarRepository danaKeluarRepository;
     private final UserRepository userRepository;
-    private final DanaKeluarPublisher danaKeluarPublisher;
+
+    private DanaKeluarPublisher danaKeluarPublisher;
 
     public DanaKeluarServiceImpl(DanaKeluarRepository danaKeluarRepository, UserRepository userRepository) {
         this.danaKeluarRepository = danaKeluarRepository;
