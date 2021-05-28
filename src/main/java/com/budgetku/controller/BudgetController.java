@@ -33,8 +33,7 @@ public class BudgetController {
 
     @GetMapping(path = "/list/{userId}", produces = {"application/json"})
     @ResponseBody
-    public String listBudget(Model model) {
-        model.addAttribute("budgetList", budgetService.getListBudget());
-        return "list-budget";
+    public ResponseEntity<Iterable<Budget>> listBudget() {
+        return ResponseEntity.ok(budgetService.getListBudget());
     }
 }
