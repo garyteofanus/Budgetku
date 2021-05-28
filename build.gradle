@@ -1,13 +1,33 @@
 plugins {
-    id 'org.springframework.boot' version '2.4.5'
+    id 'org.springframework.boot' version '2.5.0'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
     id 'jacoco'
+    id 'checkstyle'
 }
 
 group = 'com.budgetku'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
+
+apply plugin: 'java'
+apply plugin: 'checkstyle'
+apply plugin: 'idea'
+
+checkstyle {
+    config = resources.text.fromFile(configDirectory.file("checkstyle.xml"))
+    maxWarnings = 0  // Fail the build if there are any warnings
+    sourceSets = []  // Do not run checkstyle on gradle build/check
+    toolVersion = "8.42"
+}
+
+checkstyleMain {
+    source ='src/main/java'
+}
+
+checkstyleTest {
+    source ='src/test/java'
+}
 
 configurations {
     compileOnly {

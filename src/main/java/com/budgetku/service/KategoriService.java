@@ -1,7 +1,6 @@
 package com.budgetku.service;
 
 import com.budgetku.model.Kategori;
-import com.budgetku.model.User;
 
 public interface KategoriService {
 

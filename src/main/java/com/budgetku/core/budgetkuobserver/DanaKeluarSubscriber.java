@@ -1,8 +1,7 @@
 package com.budgetku.core.budgetkuobserver;
 
-import java.util.ArrayList;
-
 import com.budgetku.model.Budget;
+import java.util.ArrayList;
 
 public class DanaKeluarSubscriber {
     ArrayList<Budget> budgetList = new ArrayList<>();
@@ -19,7 +18,7 @@ public class DanaKeluarSubscriber {
 
     public void update() {
         int nominalDanaKeluar = this.danaKeluarPublisher.getDanaKeluar().getNominal();
-        for (Budget budget: budgetList) {
+        for (Budget budget : budgetList) {
             budget.setNominal(budget.getNominal() - nominalDanaKeluar);
         }
     }
