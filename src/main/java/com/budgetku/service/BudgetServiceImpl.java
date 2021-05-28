@@ -14,14 +14,12 @@ public class BudgetServiceImpl implements BudgetService {
 
     @Autowired
     private final BudgetRepository budgetRepository;
-
-    @Autowired
-    private UserRepository userRepository;
+    private final DanaKeluarSubscriber danaKeluarSubscriber;
 
     // @Autowired
     // private DanaKeluarPublisher danaKeluarPublisher;
-
-    private DanaKeluarSubscriber danaKeluarSubscriber;
+    @Autowired
+    private UserRepository userRepository;
 
     public BudgetServiceImpl(BudgetRepository budgetRepository) {
         this.budgetRepository = budgetRepository;
@@ -38,7 +36,8 @@ public class BudgetServiceImpl implements BudgetService {
         User pengguna = userRepository.findByEmail(userEmail);
         budget.setUser(pengguna);
         danaKeluarSubscriber.add(budget);
-        return budgetRepository.save(budget);
+        budgetRepository.save(budget);
+        return budget;
     }
 
     @Override

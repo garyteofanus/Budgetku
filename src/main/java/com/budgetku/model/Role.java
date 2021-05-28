@@ -1,9 +1,13 @@
 package com.budgetku.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 
 @Entity
 @Table(name = "role")
@@ -18,7 +22,7 @@ public class Role {
     @Column(name = "name")
     private String name;
 
-    public Role(String name){
+    public Role(String name) {
         super();
         this.name = name;
     }
