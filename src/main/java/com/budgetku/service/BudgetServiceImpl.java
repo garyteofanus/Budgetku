@@ -1,5 +1,7 @@
 package com.budgetku.service;
 
+import com.budgetku.core.budgetkuobserver.DanaKeluarPublisher;
+import com.budgetku.core.budgetkuobserver.DanaKeluarSubscriber;
 import com.budgetku.model.Budget;
 import com.budgetku.model.User;
 import com.budgetku.repository.BudgetRepository;
@@ -16,8 +18,14 @@ public class BudgetServiceImpl implements BudgetService {
     @Autowired
     private UserRepository userRepository;
 
+    // @Autowired
+    // private DanaKeluarPublisher danaKeluarPublisher;
+
+    private DanaKeluarSubscriber danaKeluarSubscriber;
+
     public BudgetServiceImpl(BudgetRepository budgetRepository) {
         this.budgetRepository = budgetRepository;
+        this.danaKeluarSubscriber = new DanaKeluarSubscriber(new DanaKeluarPublisher());
     }
 
     @Override
@@ -29,6 +37,7 @@ public class BudgetServiceImpl implements BudgetService {
     public Budget createBudget(Budget budget, String userEmail) {
         User pengguna = userRepository.findByEmail(userEmail);
         budget.setUser(pengguna);
+        danaKeluarSubscriber.add(budget);
         return budgetRepository.save(budget);
     }
 
