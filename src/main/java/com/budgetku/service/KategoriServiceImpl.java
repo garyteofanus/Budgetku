@@ -8,23 +8,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class KategoriServiceImpl implements KategoriService{
+public class KategoriServiceImpl implements KategoriService {
     @Autowired
     private KategoriRepository kategoriRepository;
 
     @Autowired
-    private UserRepository UserRepository;
+    private UserRepository userRepository;
 
     @Override
     public Iterable<Kategori> getListKategoriByUser(String userEmail) {
-        User user = UserRepository.findByEmail(userEmail);
+        User user = userRepository.findByEmail(userEmail);
         return kategoriRepository.findByUser(user);
     }
 
     @Override
     public Kategori createKategori(String namaKategori, String deskripsi, String userEmail) {
-        User user = UserRepository.findByEmail(userEmail);
-        Kategori kategori = new Kategori(namaKategori,deskripsi,user);
+        User user = userRepository.findByEmail(userEmail);
+        Kategori kategori = new Kategori(namaKategori, deskripsi, user);
         kategoriRepository.save(kategori);
         return kategori;
     }
