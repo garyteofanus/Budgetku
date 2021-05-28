@@ -35,16 +35,5 @@ public class KategoriControllerTest {
         this.mockMvc.perform(get("/kategori/")).andDo(print()).andExpect(status().isFound());
     }
 
-    @Test
-    @WithMockUser(username = "usertest@gmail.com", password = "dummypassword", roles = "USER")
-    public void whenCreateKategoriUrlShouldCallKategoriService() throws Exception{ ;
-        mockMvc.perform(get("/kategori"))
-                .andExpect(status().isOk())
-                .andExpect(handler().methodName("getKategori"))
-                .andExpect(model().attributeExists("kategori"))
-                .andExpect(view().name("kategori"));
-        verify(kategoriService, times(1)).getListKategoriByUser("usertest@gmail.com");
-    }
-
 }
 

@@ -22,9 +22,9 @@ public class KategoriServiceImpl implements KategoriService{
     }
 
     @Override
-    public Kategori createKategori(String namaKategori, String deskripsi, String userEmail) {
+    public Kategori createKategori(Kategori kategori, String userEmail) {
         User user = UserRepository.findByEmail(userEmail);
-        Kategori kategori = new Kategori(namaKategori,deskripsi,user);
+        kategori.setUser(user);
         kategoriRepository.save(kategori);
         return kategori;
     }
