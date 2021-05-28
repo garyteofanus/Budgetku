@@ -1,6 +1,6 @@
-package com.budgetku.budgetState;
+package com.budgetku.budgetstate;
 
-public class NormalBudgetState implements BudgetState{
+public class NormalBudgetState implements BudgetState {
 
     @Override
     public String getSummary() {

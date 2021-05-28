@@ -1,4 +1,4 @@
-package com.budgetku.budgetState;
+package com.budgetku.budgetstate;
 
 public class ExpiredBudgetState implements BudgetState {
 

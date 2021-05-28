@@ -20,7 +20,7 @@ public class DanaKeluarController {
     }
 
     @GetMapping
-    public String showDanaKeluarForm(){
+    public String showDanaKeluarForm() {
         return "danakeluar";
     }
 

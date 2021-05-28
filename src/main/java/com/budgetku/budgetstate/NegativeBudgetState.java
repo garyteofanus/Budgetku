@@ -1,6 +1,6 @@
-package com.budgetku.budgetState;
+package com.budgetku.budgetstate;
 
-public class NegativeBudgetState implements BudgetState{
+public class NegativeBudgetState implements BudgetState {
     @Override
     public String getSummary() {
         return "This budget has negative amount of money!!";
