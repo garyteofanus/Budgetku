@@ -1,5 +1,7 @@
 package com.budgetku.service;
 
+import com.budgetku.budgetstate.BudgetState;
+import com.budgetku.budgetstate.NormalBudgetState;
 import com.budgetku.core.budgetkuobserver.DanaKeluarPublisher;
 import com.budgetku.core.budgetkuobserver.DanaKeluarSubscriber;
 import com.budgetku.model.Budget;
@@ -12,6 +14,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class BudgetServiceImpl implements BudgetService {
 
+    private BudgetState budgetState;
+
     @Autowired
     private final BudgetRepository budgetRepository;
     private final DanaKeluarSubscriber danaKeluarSubscriber;
@@ -22,6 +26,7 @@ public class BudgetServiceImpl implements BudgetService {
     private UserRepository userRepository;
 
     public BudgetServiceImpl(BudgetRepository budgetRepository) {
+        this.budgetState = new NormalBudgetState();
         this.budgetRepository = budgetRepository;
         this.danaKeluarSubscriber = new DanaKeluarSubscriber(new DanaKeluarPublisher());
     }
@@ -57,7 +62,7 @@ public class BudgetServiceImpl implements BudgetService {
 
     @Override
     public String getSummary() {
-        return "Summary";
+        return budgetState.getSummary();
     }
 }
 
