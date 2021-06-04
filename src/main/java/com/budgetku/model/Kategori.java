@@ -7,8 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,7 +34,7 @@ public class Kategori {
     @JoinColumn(name = "user_budget")
     private User user;
 
-    @ManyToMany(mappedBy = "kategoriList")
+    @OneToMany(mappedBy = "kategori")
     private List<Budget> budgetList;
 
     public Kategori(String namaKategori, String deskripsi, User user) {
