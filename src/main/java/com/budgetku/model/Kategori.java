@@ -1,5 +1,6 @@
 package com.budgetku.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,10 +31,12 @@ public class Kategori {
     @Column(name = "deskripsi")
     private String deskripsi;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_budget")
     private User user;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "kategori")
     private List<Budget> budgetList;
 
