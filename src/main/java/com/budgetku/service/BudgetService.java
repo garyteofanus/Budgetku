@@ -5,7 +5,7 @@ import com.budgetku.model.Budget;
 public interface BudgetService {
     Iterable<Budget> getListBudget();
 
-    Iterable<Budget> getListBudgetByUser(int id);
+    Iterable<Budget> getListBudgetByUser(String email);
 
     Budget createBudget(Budget budget, String userEmail);
 

@@ -33,8 +33,6 @@ public class BudgetServiceImpl implements BudgetService {
         this.budgetRepository = budgetRepository;
         this.danaKeluarService = danaKeluarService;
         this.danaKeluarSubscriber = new DanaKeluarSubscriber(this.danaKeluarService.getDanaKeluarPublisher());
-        // System.out.println(this.danaKeluarService.getDanaKeluarPublisher().getSubscribers());
-        // System.out.println(this.danaKeluarSubscriber.getBudgetList());
     }
 
     @Override
@@ -42,10 +40,10 @@ public class BudgetServiceImpl implements BudgetService {
         return budgetRepository.findAll();
     }
 
-    public Iterable<Budget> getListBudgetByUser(int id) {
+    public Iterable<Budget> getListBudgetByUser(String email) {
         List<Budget> res = new ArrayList<>();
         for (Budget budget: budgetRepository.findAll()) {
-            if (budget.getUser().getId() == id) {
+            if (budget.getUser().getEmail().equals(email)) {
                 res.add(budget);
             }
         }
