@@ -44,8 +44,8 @@ public class KategoriServiceImplTest {
 
     @Test
     public void testServiceCreateKategori(){
-        when(kategoriService.createKategori("Test", "Desc", "dummy@gmail.com" )).thenReturn(kategori);
-        Kategori resultKategori = kategoriService.createKategori("Test", "Desc", "dummy@gmail.com" );
+        when(kategoriService.createKategori(kategori,user.getEmail())).thenReturn(kategori);
+        Kategori resultKategori = kategoriService.createKategori(kategori,user.getEmail() );
         assertEquals(kategori.getNamaKategori(), resultKategori.getNamaKategori());
     }
 

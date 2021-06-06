@@ -45,9 +45,9 @@ public class Budget {
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
-        name = "budget_kategori",
-        joinColumns = @JoinColumn(name = "budget_id", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "kategori_id", referencedColumnName = "id_kategori")
+            name = "budget_kategori",
+            joinColumns = @JoinColumn(name = "budget_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "kategori_id", referencedColumnName = "id_kategori")
     )
     private List<Kategori> kategoriList;
 

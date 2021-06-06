@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 public class Kategori {
 
     @Id
-    @Column(name = "id_kategori", updatable = false, nullable = false)
+    @Column(name = "id_kategori")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idKategori;
 
