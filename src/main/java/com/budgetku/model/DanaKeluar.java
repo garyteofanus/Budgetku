@@ -1,19 +1,18 @@
 package com.budgetku.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import javax.persistence.*;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
+@ToString
 @Entity
 @Table(name = "dana_keluar")
 @Data
@@ -28,17 +27,25 @@ public class DanaKeluar {
     private Integer nominal;
 
     @Column(name = "tanggal")
-    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-    private LocalDateTime tanggal;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date tanggal;
 
     @Column(name = "deskripsi")
     private String deskripsi;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "danakel_kategori",
+            joinColumns = @JoinColumn(name = "budget_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "kategori_id", referencedColumnName = "id_kategori")
+    )
+    private List<Kategori> kategoriList;
 
     @ManyToOne
     @JoinColumn(name = "user_budget")
     private User user;
 
-    public DanaKeluar(Integer nominal, LocalDateTime tanggal, String deskripsi, User user) {
+    public DanaKeluar(Integer nominal, Date tanggal, String deskripsi, User user) {
         super();
         this.nominal = nominal;
         this.tanggal = tanggal;
@@ -46,12 +53,12 @@ public class DanaKeluar {
         this.user = user;
     }
 
-    public DanaKeluar(Integer nominal, String tanggal, String deskripsi, User user) {
+    public DanaKeluar(Integer nominal, String tanggal, String deskripsi) throws ParseException {
         this(
-            nominal,
-            LocalDateTime.parse(tanggal, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")),
-            deskripsi,
-            user
+                nominal,
+                new SimpleDateFormat("yyyy-MM-dd").parse(tanggal),
+                deskripsi,
+                null
         );
     }
 }

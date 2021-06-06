@@ -23,10 +23,9 @@ public class DanaKeluarServiceImpl implements DanaKeluarService {
     }
 
     @Override
-    public DanaKeluar createDanaKeluar(Integer nominal, String tanggal, String deskripsi,
-                                       String userEmail) {
+    public DanaKeluar createDanaKeluar(DanaKeluar danaKeluar, String userEmail) {
         User pengguna = userRepository.findByEmail(userEmail);
-        DanaKeluar danaKeluar = new DanaKeluar(nominal, tanggal, deskripsi, pengguna);
+        danaKeluar.setUser(pengguna);
         danaKeluarPublisher.addDanaKeluar(danaKeluar);
         danaKeluarRepository.save(danaKeluar);
         return danaKeluar;
