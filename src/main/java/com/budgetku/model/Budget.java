@@ -45,9 +45,9 @@ public class Budget {
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
-        name = "budget_kategori",
-        joinColumns = @JoinColumn(name = "budget_id", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "kategori_id", referencedColumnName = "id_kategori")
+            name = "budget_kategori",
+            joinColumns = @JoinColumn(name = "budget_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "kategori_id", referencedColumnName = "id_kategori")
     )
     private List<Kategori> kategoriList;
 
@@ -72,19 +72,6 @@ public class Budget {
         this.deskripsi = deskripsi;
         this.user = user;
         this.state = new NormalBudgetState();
-    }
-
-    /**
-     * Observer pattern update method.
-     *
-     * @param id         budget id
-     * @param danaKeluar outgoing money
-     */
-    // Observer Subscriber's update method called from DanaKeluarService
-    public void update(int id, DanaKeluar danaKeluar) {
-        if (this.id == id) {
-            this.nominal -= danaKeluar.getNominal();
-        }
     }
 
     public void changeState(BudgetState newState) {

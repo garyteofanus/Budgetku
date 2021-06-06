@@ -1,14 +1,17 @@
 package com.budgetku.controller;
 
+import com.budgetku.model.Budget;
 import com.budgetku.model.Kategori;
 import com.budgetku.service.KategoriService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import java.util.*;
 
-@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/kategori")
 public class KategoriController {
@@ -16,21 +19,19 @@ public class KategoriController {
     @Autowired
     private KategoriService kategoriService;
 
-    @GetMapping( produces = {"application/json"})
+    @CrossOrigin(origins = "http://localhost:8080")
+    @GetMapping(path = "/{email}", produces = {"application/json"})
     @ResponseBody
-    public ResponseEntity<Iterable<Kategori>> getListKategoriByUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userEmail = authentication.getName();
-        return ResponseEntity.ok(kategoriService.getListKategoriByUser(userEmail));
+    public ResponseEntity<Iterable<Kategori>> listKategori(@PathVariable(value = "email") String email) {
+        return ResponseEntity.ok(kategoriService.getListKategoriByUser(email));
     }
 
-    @PostMapping(path = "/create", produces = {"application/json"})
-    @ResponseBody
-    public ResponseEntity createKategori(@RequestBody Kategori kategori) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userEmail = authentication.getName();
-        return ResponseEntity.ok(kategoriService.createKategori(kategori, userEmail));
-    }
 
+    @CrossOrigin(origins = "http://localhost:8080")
+    @PostMapping(path = "/create/{email}", produces = {"application/json"},consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity createKategori(@PathVariable(value = "email") String email, @RequestBody Kategori kategori) {
+        return ResponseEntity.ok(kategoriService.createKategori(kategori, email));
+    }
 }
 
