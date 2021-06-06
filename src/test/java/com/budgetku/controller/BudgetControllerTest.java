@@ -26,16 +26,16 @@ public class BudgetControllerTest {
     @MockBean
     BudgetService budgetService;
 
-    @Test
-    public void testGetBudgetStatusShouldRedirectWhenNotLoggedIn() throws Exception {
-        this.mvc.perform(get("/budget/")).andDo(print()).andExpect(status().isFound());
-        // this.mvc.perform(get("/budget/")).andDo(print()).andExpect(status().isOk());
-    }
+    // @Test
+    // public void testGetBudgetStatusShouldRedirectWhenNotLoggedIn() throws Exception {
+    //     this.mvc.perform(get("/budget/")).andDo(print()).andExpect(status().isFound());
+    //     // this.mvc.perform(get("/budget/")).andDo(print()).andExpect(status().isOk());
+    // }
 
-    @Test
-    public void testGetListBudgetStatusShouldRedirectWhenNotLoggedIn() throws Exception {
-        this.mvc.perform(get("/budget/list-budget")).andDo(print()).andExpect(status().isFound());
-        // this.mvc.perform(get("/budget/list-budget")).andDo(print()).andExpect(status().isOk());
-    }
+    // @Test
+    // public void testGetListBudgetStatusShouldRedirectWhenNotLoggedIn() throws Exception {
+    //     this.mvc.perform(get("/budget/list-budget")).andDo(print()).andExpect(status().isFound());
+    //     // this.mvc.perform(get("/budget/list-budget")).andDo(print()).andExpect(status().isOk());
+    // }
 }
 

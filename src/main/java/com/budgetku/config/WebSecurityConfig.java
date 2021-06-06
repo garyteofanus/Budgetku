@@ -35,17 +35,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
             .authorizeRequests()
             .antMatchers(
-            "/register**",
-            "/js/**",
-            "/css/**",
-            "/img/**")
+            "/**")
+            // "/register**",
+            // "/js/**",
+            // "/css/**",
+            // "/img/**")
             .permitAll()
             .anyRequest().authenticated()
             .and()
             .formLogin()
             .loginPage("/login")
             .permitAll()
-            // .defaultSuccessUrl("/redirect")
             .and()
             .logout()
             .invalidateHttpSession(true)
