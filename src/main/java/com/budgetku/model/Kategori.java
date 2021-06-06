@@ -10,6 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -32,6 +35,7 @@ public class Kategori {
 
     @ManyToOne
     @JoinColumn(name = "user_budget")
+    @JsonIgnore
     private User user;
 
     @ManyToMany(mappedBy = "kategoriList")
