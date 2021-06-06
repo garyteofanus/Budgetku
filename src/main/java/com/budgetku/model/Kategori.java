@@ -1,10 +1,20 @@
 package com.budgetku.model;
 
+import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "kategori")
@@ -13,7 +23,7 @@ import java.util.List;
 public class Kategori {
 
     @Id
-    @Column(name = "id_kategori", updatable = false, nullable = false)
+    @Column(name = "id_kategori")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idKategori;
 
@@ -24,7 +34,8 @@ public class Kategori {
     private String deskripsi;
 
     @ManyToOne
-    @JoinColumn(name="user_budget")
+    @JoinColumn(name = "user_budget")
+    @JsonIgnore
     private User user;
 
     @ManyToMany(mappedBy = "kategoriList")
@@ -40,15 +51,15 @@ public class Kategori {
         return idKategori;
     }
 
-    public String getNamaKategori(){
+    public String getNamaKategori() {
         return namaKategori;
     }
 
-    public String getDeskripsi(){
+    public String getDeskripsi() {
         return deskripsi;
     }
 
-    public User getUser(){
+    public User getUser() {
         return user;
     }
 }
