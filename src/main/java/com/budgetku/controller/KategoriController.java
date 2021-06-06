@@ -8,7 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/kategori")
 public class KategoriController {
@@ -16,7 +16,7 @@ public class KategoriController {
     @Autowired
     private KategoriService kategoriService;
 
-    @GetMapping(produces = {"application/json"})
+    @GetMapping( produces = {"application/json"})
     @ResponseBody
     public ResponseEntity<Iterable<Kategori>> getListKategoriByUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -24,12 +24,13 @@ public class KategoriController {
         return ResponseEntity.ok(kategoriService.getListKategoriByUser(userEmail));
     }
 
-    @PostMapping(produces = {"application/json"})
+    @PostMapping(path = "/create", produces = {"application/json"})
     @ResponseBody
     public ResponseEntity createKategori(@RequestBody Kategori kategori) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userEmail = authentication.getName();
         return ResponseEntity.ok(kategoriService.createKategori(kategori, userEmail));
     }
+
 }
 
