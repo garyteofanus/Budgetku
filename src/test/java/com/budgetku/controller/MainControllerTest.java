@@ -32,9 +32,9 @@ public class MainControllerTest {
         this.mvc.perform(get("/")).andDo(print()).andExpect(status().isFound());
     }
 
-    @Test
-    @WithMockUser
-    public void testGetHomeStatusShouldOkWithLoggedInUser() throws Exception {
-        this.mvc.perform(get("/")).andDo(print()).andExpect(status().isOk());
-    }
+//     @Test
+//     @WithMockUser
+//     public void testGetHomeStatusShouldOkWithLoggedInUser() throws Exception {
+//         this.mvc.perform(get("/")).andDo(print()).andExpect(status().isOk());
+//     }
 }

@@ -1,5 +1,7 @@
 package com.budgetku.controller;
 
+import com.budgetku.model.Budget;
+import com.budgetku.model.User;
 import com.budgetku.service.BudgetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,10 +44,10 @@ public class BudgetController {
         return new ResponseEntity<String>("Thank you for submitting feedback.", HttpStatus.OK);
     }
 
-    @GetMapping(path = "/list/{userId}", produces = {"application/json"})
+    @CrossOrigin(origins = "http://localhost:8080")
+    @GetMapping(path = "/list/{email}", produces = {"application/json"})
     @ResponseBody
-    public String listBudget(Model model) {
-        model.addAttribute("budgetList", budgetService.getListBudget());
-        return "list-budget";
+    public ResponseEntity<Iterable<Budget>> listBudget(@PathVariable(value = "email") String email) {
+        return ResponseEntity.ok(budgetService.getListBudgetByUser(email));
     }
 }
