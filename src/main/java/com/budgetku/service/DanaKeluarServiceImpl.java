@@ -31,4 +31,8 @@ public class DanaKeluarServiceImpl implements DanaKeluarService {
         danaKeluarRepository.save(danaKeluar);
         return danaKeluar;
     }
+
+    public DanaKeluarPublisher getDanaKeluarPublisher() {
+        return danaKeluarPublisher;
+    }
 }

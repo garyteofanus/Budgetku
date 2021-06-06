@@ -33,6 +33,7 @@ public class KategoriController {
     ) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userEmail = authentication.getName();
+        System.out.println(userEmail);
         kategoriService.createKategori(namaKategori, deskripsi, userEmail);
         return "redirect:/kategori?success";
     }
