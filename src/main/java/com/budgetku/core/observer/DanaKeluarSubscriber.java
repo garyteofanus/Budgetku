@@ -1,26 +1,26 @@
 package com.budgetku.core.observer;
 
 import com.budgetku.model.Budget;
+import com.budgetku.repository.BudgetRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.budgetku.core.state.NegativeBudgetState;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DanaKeluarSubscriber {
-    private final List<Budget> budgetList = new ArrayList<>();
+
+    @Autowired
+    private final BudgetRepository budgetRepository;
+
     private final DanaKeluarPublisher danaKeluarPublisher;
 
-    public DanaKeluarSubscriber(DanaKeluarPublisher danaKeluarPublisher) {
+    public DanaKeluarSubscriber(DanaKeluarPublisher danaKeluarPublisher, BudgetRepository budgetRepository) {
+        this.budgetRepository = budgetRepository;
         this.danaKeluarPublisher = danaKeluarPublisher;
         this.danaKeluarPublisher.addSubscriber(this);
-    }
-
-    public void add(Budget budget) {
-        this.budgetList.add(budget);
-    }
-
-    public List<Budget> getBudgetList() {
-        return this.budgetList;
     }
 
     private void checkState(Budget budget) {
@@ -29,11 +29,15 @@ public class DanaKeluarSubscriber {
         }
     }
 
-    public void update() {
+    // Wait for DanaKeluar with Budget attr
+    public void update(String userEmail) {
         int nominalDanaKeluar = this.danaKeluarPublisher.getDanaKeluar().getNominal();
-        for (Budget budget : budgetList) {
-            budget.setNominal(budget.getNominal() - nominalDanaKeluar);
-            checkState(budget);
+        // Budget budgetDanaKeluar = this.danaKeluarPublisher.getDanaKeluar().getBudget();
+        for (Budget budget : budgetRepository.findAll()) {
+            if (budget.getUser().getEmail().equals(userEmail) && budget.equals(budget)) {
+                budget.setNominal(budget.getNominal() - nominalDanaKeluar);
+                checkState(budget);
+            }
         }
     }
 }

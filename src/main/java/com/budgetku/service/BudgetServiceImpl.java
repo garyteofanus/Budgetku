@@ -30,7 +30,7 @@ public class BudgetServiceImpl implements BudgetService {
     public BudgetServiceImpl(BudgetRepository budgetRepository, DanaKeluarService danaKeluarService) {
         this.budgetRepository = budgetRepository;
         this.danaKeluarService = danaKeluarService;
-        this.danaKeluarSubscriber = new DanaKeluarSubscriber(this.danaKeluarService.getDanaKeluarPublisher());
+        this.danaKeluarSubscriber = new DanaKeluarSubscriber(this.danaKeluarService.getDanaKeluarPublisher(), this.budgetRepository);
     }
 
     @Override
@@ -62,7 +62,6 @@ public class BudgetServiceImpl implements BudgetService {
     public Budget createBudget(Budget budget, String userEmail) {
         User pengguna = userRepository.findByEmail(userEmail);
         budget.setUser(pengguna);
-        danaKeluarSubscriber.add(budget);
         budgetRepository.save(budget);
         return budget;
     }

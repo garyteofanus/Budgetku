@@ -26,7 +26,8 @@ public class DanaKeluarServiceImpl implements DanaKeluarService {
     public DanaKeluar createDanaKeluar(DanaKeluar danaKeluar, String userEmail) {
         User pengguna = userRepository.findByEmail(userEmail);
         danaKeluar.setUser(pengguna);
-        danaKeluarPublisher.addDanaKeluar(danaKeluar);
+        danaKeluarPublisher.setUserEmail(userEmail);
+        danaKeluarPublisher.setDanaKeluar(danaKeluar);
         danaKeluarRepository.save(danaKeluar);
         return danaKeluar;
     }
