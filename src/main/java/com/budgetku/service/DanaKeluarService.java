@@ -1,6 +1,6 @@
 package com.budgetku.service;
 
-import com.budgetku.core.budgetkuobserver.DanaKeluarPublisher;
+import com.budgetku.core.observer.DanaKeluarPublisher;
 import com.budgetku.model.DanaKeluar;
 
 public interface DanaKeluarService {

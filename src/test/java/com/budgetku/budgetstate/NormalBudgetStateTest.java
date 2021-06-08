@@ -2,6 +2,7 @@ package com.budgetku.budgetstate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.budgetku.core.state.NormalBudgetState;
 import org.junit.jupiter.api.Test;
 
 public class NormalBudgetStateTest {
