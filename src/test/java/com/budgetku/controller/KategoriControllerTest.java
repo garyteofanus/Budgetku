@@ -74,8 +74,5 @@ public class KategoriControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(handler().methodName("createKategori"));
     }
-
-
-
 }
 
