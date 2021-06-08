@@ -9,17 +9,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class BudgetServiceImpl implements BudgetService {
 
-    @Autowired
     private final BudgetRepository budgetRepository;
 
-    @Autowired
     private final DanaKeluarService danaKeluarService;
 
     private final DanaKeluarSubscriber danaKeluarSubscriber;
@@ -68,13 +65,21 @@ public class BudgetServiceImpl implements BudgetService {
     }
 
     @Override
+    public Budget getBudgetById(Long id) {
+        if (budgetRepository.findById(id).isPresent()) {
+            return budgetRepository.findById(id).get();
+        }
+        return null;
+    }
+
+    @Override
     public Budget updateBudget(int id) {
         return null;
     }
 
     @Override
     public void deleteBudgetById(int id) {
-        budgetRepository.deleteById((long)id);
+        budgetRepository.deleteById((long) id);
     }
 }
 

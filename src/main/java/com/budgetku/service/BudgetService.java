@@ -1,8 +1,7 @@
 package com.budgetku.service;
 
-import java.util.Map;
-
 import com.budgetku.model.Budget;
+import java.util.Map;
 
 public interface BudgetService {
 
@@ -11,6 +10,8 @@ public interface BudgetService {
     Iterable<Map<Budget, String[]>> getListBudgetAndStateByUser(String email);
 
     Budget createBudget(Budget budget, String userEmail);
+
+    Budget getBudgetById(Long id);
 
     Budget updateBudget(int id);
 
