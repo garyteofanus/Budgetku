@@ -1,8 +1,10 @@
 package com.budgetku.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,11 +15,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name = "dana_keluar")
 @Data
 @NoArgsConstructor
+@ToString
 public class DanaKeluar {
 
     @Id
@@ -34,8 +38,9 @@ public class DanaKeluar {
     @Column(name = "deskripsi")
     private String deskripsi;
 
-    @ManyToOne
-    @JoinColumn(name = "user_budget")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "account_id")
+    @JsonIgnore
     private User user;
 
     public DanaKeluar(Integer nominal, LocalDateTime tanggal, String deskripsi, User user) {

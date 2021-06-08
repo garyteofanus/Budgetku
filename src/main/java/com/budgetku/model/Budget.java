@@ -1,12 +1,12 @@
 package com.budgetku.model;
 
-import com.budgetku.budgetstate.BudgetState;
-import com.budgetku.budgetstate.NormalBudgetState;
+import com.budgetku.core.state.BudgetState;
+import com.budgetku.core.state.NormalBudgetState;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,11 +19,11 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
-@ToString
 @Entity
 @Table(name = "budget")
 @Data
 @NoArgsConstructor
+@ToString
 public class Budget {
 
     @Id
@@ -40,12 +40,14 @@ public class Budget {
     @Column(name = "deskripsi")
     private String deskripsi;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_kategori")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "kategori_id")
+    @JsonIgnore
     private Kategori kategori;
 
-    @ManyToOne
-    @JoinColumn(name = "user_budget")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "account_id")
+    @JsonIgnore
     private User user;
 
     @Transient
@@ -59,10 +61,11 @@ public class Budget {
      * @param deskripsi description for the budget
      * @param user      user that perform create the budget
      */
-    public Budget(Long nominal, Date tanggal, String deskripsi, User user) {
+    public Budget(Long nominal, Date tanggal, String deskripsi, Kategori kategori, User user) {
         this.nominal = nominal;
         this.tanggal = tanggal;
         this.deskripsi = deskripsi;
+        this.kategori = kategori;
         this.user = user;
         this.state = new NormalBudgetState();
     }

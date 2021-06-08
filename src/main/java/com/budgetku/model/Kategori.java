@@ -2,6 +2,7 @@ package com.budgetku.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,58 +12,39 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name = "kategori")
 @Data
 @NoArgsConstructor
+@ToString
 public class Kategori {
 
     @Id
-    @Column(name = "id_kategori")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idKategori;
+    private Long id;
 
-    @Column(name = "namaKategori")
-    private String namaKategori;
+    @Column(name = "nama")
+    private String nama;
 
     @Column(name = "deskripsi")
     private String deskripsi;
 
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "user_budget")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "account_id")
     @JsonIgnore
     private User user;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "kategori")
+    @JsonIgnore
     private List<Budget> budgetList;
 
-    public Kategori(String namaKategori, String deskripsi, User user) {
-        this.namaKategori = namaKategori;
+    public Kategori(String nama, String deskripsi, User user) {
+        this.nama = nama;
         this.deskripsi = deskripsi;
         this.user = user;
-    }
-
-    public long getId() {
-        return idKategori;
-    }
-
-    public String getNamaKategori() {
-        return namaKategori;
-    }
-
-    public String getDeskripsi() {
-        return deskripsi;
-    }
-
-    public User getUser() {
-        return user;
     }
 }
