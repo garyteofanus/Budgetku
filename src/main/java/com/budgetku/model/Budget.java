@@ -2,6 +2,7 @@ package com.budgetku.model;
 
 import com.budgetku.core.state.BudgetState;
 import com.budgetku.core.state.NormalBudgetState;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.CascadeType;
@@ -44,6 +45,7 @@ public class Budget {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "kategori_id")
     @JsonManagedReference
+    // @JsonBackReference
     private Kategori kategori;
 
     @ManyToOne(cascade = CascadeType.ALL)
