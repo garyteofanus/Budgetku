@@ -36,22 +36,22 @@ public class DanaKeluarControllerTest {
     private DanaKeluar danaKeluar1;
     private User user;
 
-    @BeforeEach
-    public void setUp() throws Exception {
-        user = new User(
-                "nama depan",
-                "nama belakang",
-                "email@mail.com",
-                "password",
-                Collections.singleton(new Role("ROLE_USER"))
-        );
-        userRepository.save(user);
+    // @BeforeEach
+    // public void setUp() throws Exception {
+    //     user = new User(
+    //             "nama depan",
+    //             "nama belakang",
+    //             "email@mail.com",
+    //             "password",
+    //             Collections.singleton(new Role("ROLE_USER"))
+    //     );
+    //     userRepository.save(user);
 
-        danaKeluar1 = new DanaKeluar(
-                1000,
-                "2021-06-21",
-                "ini desc");
-    }
+    //     danaKeluar1 = new DanaKeluar(
+    //             1000,
+    //             "2021-06-21",
+    //             "ini desc");
+    // }
 
 //    void testControllerCreateDanakeluar() throws Exception {
 //        danaKeluar1.setId(1L);

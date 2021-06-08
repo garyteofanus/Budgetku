@@ -1,8 +1,6 @@
 package com.budgetku.service;
 
 import com.budgetku.core.observer.DanaKeluarSubscriber;
-import com.budgetku.core.state.BudgetState;
-import com.budgetku.core.state.NormalBudgetState;
 import com.budgetku.model.Budget;
 import com.budgetku.model.User;
 import com.budgetku.repository.BudgetRepository;
@@ -35,15 +33,15 @@ public class BudgetServiceImpl implements BudgetService {
         this.danaKeluarSubscriber = new DanaKeluarSubscriber(this.danaKeluarService.getDanaKeluarPublisher());
     }
 
-    public Iterable<Map<Budget, String[]>> getListBudgetByUser(String email) {
-        List<Map<Budget, String[]>> res = new ArrayList<>();
-        // List<Budget> alt = new ArrayList<>();
+    public Iterable<Budget> getListBudgetByUser(String email) {
+        // List<Map<Budget, String[]>> res = new ArrayList<>();
+        List<Budget> res = new ArrayList<>();
         for (Budget budget: budgetRepository.findAll()) {
             if (budget.getUser().getEmail().equals(email)) {
-                res.add(new HashMap<Budget, String[]>() {{
-                    put(budget, new String[]{budget.getState().getSummary()});
-                }});
-                // alt.add(budget);
+                // res.add(new HashMap<Budget, String[]>() {{
+                //     put(budget, new String[]{budget.getState().getSummary()});
+                // }});
+                res.add(budget);
             }
         }
         return res;
