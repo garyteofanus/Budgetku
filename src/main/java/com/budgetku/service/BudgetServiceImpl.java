@@ -33,15 +33,26 @@ public class BudgetServiceImpl implements BudgetService {
         this.danaKeluarSubscriber = new DanaKeluarSubscriber(this.danaKeluarService.getDanaKeluarPublisher());
     }
 
+    @Override
     public Iterable<Budget> getListBudgetByUser(String email) {
-        // List<Map<Budget, String[]>> res = new ArrayList<>();
         List<Budget> res = new ArrayList<>();
         for (Budget budget: budgetRepository.findAll()) {
             if (budget.getUser().getEmail().equals(email)) {
-                // res.add(new HashMap<Budget, String[]>() {{
-                //     put(budget, new String[]{budget.getState().getSummary()});
-                // }});
                 res.add(budget);
+            }
+        }
+        return res;
+    }
+
+    @Override
+    public Iterable<Map<Budget, String[]>> getListBudgetAndStateByUser(String email) {
+        List<Map<Budget, String[]>> res = new ArrayList<>();
+        for (Budget budget: budgetRepository.findAll()) {
+            if (budget.getUser().getEmail().equals(email)) {
+                System.out.println(budget.getState());
+                res.add(new HashMap<Budget, String[]>() {{
+                    put(budget, new String[]{budget.getState().getSummary()});
+                }});
             }
         }
         return res;
