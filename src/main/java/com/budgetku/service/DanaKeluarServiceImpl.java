@@ -22,6 +22,16 @@ public class DanaKeluarServiceImpl implements DanaKeluarService {
         this.danaKeluarPublisher = new DanaKeluarPublisher();
     }
 
+//    @Override
+//    public DanaKeluar createDanaKeluar(Integer nominal, String tanggal, String deskripsi,
+//                                       String userEmail) {
+//        User pengguna = userRepository.findByEmail(userEmail);
+//        DanaKeluar danaKeluar = new DanaKeluar(nominal, budget, deskripsi, pengguna);
+//        danaKeluarPublisher.addDanaKeluar(danaKeluar);
+//        danaKeluarRepository.save(danaKeluar);
+//        return danaKeluar;
+//    }
+
     @Override
     public DanaKeluar createDanaKeluar(DanaKeluar danaKeluar, String userEmail) {
         User pengguna = userRepository.findByEmail(userEmail);
@@ -31,6 +41,7 @@ public class DanaKeluarServiceImpl implements DanaKeluarService {
         return danaKeluar;
     }
 
+    @Override
     public DanaKeluarPublisher getDanaKeluarPublisher() {
         return danaKeluarPublisher;
     }

@@ -38,10 +38,10 @@ public class BudgetServiceImplTest {
         );
     }
 
-    @Test
-    public void whenGetSummaryIsCalledItShouldReturnSummary() {
-        assertEquals("Summary", budgetService.getSummary());
-    }
+    // @Test
+    // public void whenGetSummaryIsCalledItShouldReturnSummary() {
+    //     assertEquals("Summary", budgetService.getSummary());
+    // }
 
 //    @Test
 //    public void getListBudgetShouldReturnListOfBudgets() {

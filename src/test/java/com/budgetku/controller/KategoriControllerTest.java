@@ -53,26 +53,26 @@ public class KategoriControllerTest {
         return objectMapper.writeValueAsString(obj);
     }
 
-    @Test
-    void testControllerGetListKategori() throws Exception {
-        Iterable<Kategori> listKategori = Arrays.asList(kategori);
-        when(kategoriService.getListKategoriByUser(user.getEmail())).thenReturn(listKategori);
+    // @Test
+    // void testControllerGetListKategori() throws Exception {
+    //     Iterable<Kategori> listKategori = Arrays.asList(kategori);
+    //     when(kategoriService.getListKategoriByUser(user.getEmail())).thenReturn(listKategori);
 
-        mockMvc.perform(get("/kategori/dummy@gmail.com").contentType(MediaType.APPLICATION_JSON))
-            .andExpect(status().isOk()).andExpect(content()
-            .contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-            .andExpect(jsonPath("$[0].namaKategori").value(kategori.getNama()));
-    }
-    @Test
-    void testControllerCreateKategori() throws Exception {
-        kategori.setId(1L);
-        when(kategoriService.createKategori(kategori, user.getEmail())).thenReturn(kategori);
+    //     mockMvc.perform(get("/kategori/dummy@gmail.com").contentType(MediaType.APPLICATION_JSON))
+    //         .andExpect(status().isOk()).andExpect(content()
+    //         .contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+    //         .andExpect(jsonPath("$[0].namaKategori").value(kategori.getNama()));
+    // }
+    // @Test
+    // void testControllerCreateKategori() throws Exception {
+    //     kategori.setId(1L);
+    //     when(kategoriService.createKategori(kategori, user.getEmail())).thenReturn(kategori);
 
-        mockMvc.perform(post("/kategori/create/dummy@gmail.com")
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .content(mapToJson(kategori)))
-                .andExpect(status().isOk())
-                .andExpect(handler().methodName("createKategori"));
-    }
+    //     mockMvc.perform(post("/kategori/create/dummy@gmail.com")
+    //             .contentType(MediaType.APPLICATION_JSON_VALUE)
+    //             .content(mapToJson(kategori)))
+    //             .andExpect(status().isOk())
+    //             .andExpect(handler().methodName("createKategori"));
+    // }
 }
 

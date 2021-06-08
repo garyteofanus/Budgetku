@@ -1,32 +1,34 @@
 package com.budgetku.service;
 
 import com.budgetku.core.observer.DanaKeluarSubscriber;
-import com.budgetku.core.state.BudgetState;
-import com.budgetku.core.state.NormalBudgetState;
 import com.budgetku.model.Budget;
 import com.budgetku.model.User;
 import com.budgetku.repository.BudgetRepository;
 import com.budgetku.repository.UserRepository;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class BudgetServiceImpl implements BudgetService {
 
-    private final BudgetState budgetState;
+    private final BudgetRepository budgetRepository;
+
+    private final DanaKeluarService danaKeluarService;
 
     private final DanaKeluarSubscriber danaKeluarSubscriber;
 
     @Autowired
-    private final BudgetRepository budgetRepository;
-
-    @Autowired
-    private final DanaKeluarService danaKeluarService;
-
-    @Autowired
     private UserRepository userRepository;
+
+    public BudgetServiceImpl(BudgetRepository budgetRepository, DanaKeluarService danaKeluarService) {
+        this.budgetRepository = budgetRepository;
+        this.danaKeluarService = danaKeluarService;
+        this.danaKeluarSubscriber = new DanaKeluarSubscriber(this.danaKeluarService.getDanaKeluarPublisher());
+    }
 
     @Override
     public Iterable<Budget> getListBudgetByUser(String email) {
@@ -34,6 +36,20 @@ public class BudgetServiceImpl implements BudgetService {
         for (Budget budget: budgetRepository.findAll()) {
             if (budget.getUser().getEmail().equals(email)) {
                 res.add(budget);
+            }
+        }
+        return res;
+    }
+
+    @Override
+    public Iterable<Map<Budget, String[]>> getListBudgetAndStateByUser(String email) {
+        List<Map<Budget, String[]>> res = new ArrayList<>();
+        for (Budget budget: budgetRepository.findAll()) {
+            if (budget.getUser().getEmail().equals(email)) {
+                System.out.println(budget.getState());
+                res.add(new HashMap<Budget, String[]>() {{
+                    put(budget, new String[]{budget.getState().getSummary()});
+                }});
             }
         }
         return res;
@@ -49,17 +65,21 @@ public class BudgetServiceImpl implements BudgetService {
     }
 
     @Override
-    public String getSummary() {
-        return budgetState.getSummary();
+    public Budget getBudgetById(Long id) {
+        if (budgetRepository.findById(id).isPresent()) {
+            return budgetRepository.findById(id).get();
+        }
+        return null;
     }
 
-    public BudgetServiceImpl(BudgetRepository budgetRepository,
-                             DanaKeluarService danaKeluarService) {
-        this.budgetState = new NormalBudgetState();
-        this.budgetRepository = budgetRepository;
-        this.danaKeluarService = danaKeluarService;
-        this.danaKeluarSubscriber =
-            new DanaKeluarSubscriber(this.danaKeluarService.getDanaKeluarPublisher());
+    @Override
+    public Budget updateBudget(int id) {
+        return null;
+    }
+
+    @Override
+    public void deleteBudgetById(int id) {
+        budgetRepository.deleteById((long) id);
     }
 }
 

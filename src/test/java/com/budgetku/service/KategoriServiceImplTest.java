@@ -31,39 +31,39 @@ public class KategoriServiceImplTest {
     private Kategori kategori;
     private User user;
 
-    @BeforeEach
-    public void setUp() {
-        user = new User("dummy", "user", "dummy@gmail.com", "passworddummy",
-            Collections.singleton(new Role("ROLE_USER")));
-        kategori = new Kategori();
-        kategori.setId(1L);
-        kategori.setNama("Test");
-        kategori.setDeskripsi("Desc");
-        kategori.setUser(user);
-    }
+    // @BeforeEach
+    // public void setUp() {
+    //     user = new User("dummy", "user", "dummy@gmail.com", "passworddummy",
+    //         Collections.singleton(new Role("ROLE_USER")));
+    //     kategori = new Kategori();
+    //     kategori.setId(1L);
+    //     kategori.setNama("Test");
+    //     kategori.setDeskripsi("Desc");
+    //     kategori.setUser(user);
+    // }
 
-    @Test
-    public void testServiceCreateKategori(){
-        when(kategoriService.createKategori(kategori,user.getEmail())).thenReturn(kategori);
-        Kategori resultKategori = kategoriService.createKategori(kategori,user.getEmail() );
-        assertEquals(kategori.getNama(), resultKategori.getNama());
-    }
+    // @Test
+    // public void testServiceCreateKategori(){
+    //     when(kategoriService.createKategori(kategori,user.getEmail())).thenReturn(kategori);
+    //     Kategori resultKategori = kategoriService.createKategori(kategori,user.getEmail() );
+    //     assertEquals(kategori.getNama(), resultKategori.getNama());
+    // }
 
-    @Test
-    public void testServiceGetListKategoriByUser(){
-        Iterable<Kategori> listKategori = kategoriRepository.findAllByUser(user);
-        when(kategoriService.getListKategoriByUser(user.getEmail())).thenReturn(listKategori);
-        Iterable<Kategori> listKategoriResult = kategoriService.getListKategoriByUser(user.getEmail());
-        Assertions.assertIterableEquals(listKategori, listKategoriResult);
-    }
-    @Test
-    void testServiceDeleteKategori() {
-        kategoriService.deleteKategori(kategori.getId());
-        Iterable<Kategori> listKategori = kategoriService.getListKategoriByUser(user.getEmail());
-        int sum = 0;
-        for(Kategori kategori:listKategori){
-            sum++;
-        }
-        assertEquals(0, sum);
-    }
+    // @Test
+    // public void testServiceGetListKategoriByUser(){
+    //     Iterable<Kategori> listKategori = kategoriRepository.findAllByUser(user);
+    //     when(kategoriService.getListKategoriByUser(user.getEmail())).thenReturn(listKategori);
+    //     Iterable<Kategori> listKategoriResult = kategoriService.getListKategoriByUser(user.getEmail());
+    //     Assertions.assertIterableEquals(listKategori, listKategoriResult);
+    // }
+    // @Test
+    // void testServiceDeleteKategori() {
+    //     kategoriService.deleteKategori(kategori.getId());
+    //     Iterable<Kategori> listKategori = kategoriService.getListKategoriByUser(user.getEmail());
+    //     int sum = 0;
+    //     for(Kategori kategori:listKategori){
+    //         sum++;
+    //     }
+    //     assertEquals(0, sum);
+    // }
 }
