@@ -1,19 +1,16 @@
 package com.budgetku.model;
 
-import com.budgetku.budgetstate.BudgetState;
-import com.budgetku.budgetstate.NormalBudgetState;
+import com.budgetku.core.state.BudgetState;
+import com.budgetku.core.state.NormalBudgetState;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -22,11 +19,11 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
-@ToString
 @Entity
 @Table(name = "budget")
 @Data
 @NoArgsConstructor
+@ToString
 public class Budget {
 
     @Id
@@ -43,16 +40,14 @@ public class Budget {
     @Column(name = "deskripsi")
     private String deskripsi;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "budget_kategori",
-            joinColumns = @JoinColumn(name = "budget_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "kategori_id", referencedColumnName = "id_kategori")
-    )
-    private List<Kategori> kategoriList;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "kategori_id")
+    @JsonIgnore
+    private Kategori kategori;
 
-    @ManyToOne
-    @JoinColumn(name = "user_budget")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "account_id")
+    @JsonIgnore
     private User user;
 
     @Transient
@@ -66,12 +61,26 @@ public class Budget {
      * @param deskripsi description for the budget
      * @param user      user that perform create the budget
      */
-    public Budget(Long nominal, Date tanggal, String deskripsi, User user) {
+    public Budget(Long nominal, Date tanggal, String deskripsi, Kategori kategori, User user) {
         this.nominal = nominal;
         this.tanggal = tanggal;
         this.deskripsi = deskripsi;
+        this.kategori = kategori;
         this.user = user;
         this.state = new NormalBudgetState();
+    }
+
+    /**
+     * Observer pattern update method.
+     *
+     * @param id         budget id
+     * @param danaKeluar outgoing money
+     */
+    // Observer Subscriber's update method called from DanaKeluarService
+    public void update(int id, DanaKeluar danaKeluar) {
+        if (this.id == id) {
+            this.nominal -= danaKeluar.getNominal();
+        }
     }
 
     public void changeState(BudgetState newState) {

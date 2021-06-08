@@ -1,4 +1,4 @@
-package com.budgetku.core.budgetkuobserver;
+package com.budgetku.core.observer;
 
 import com.budgetku.model.DanaKeluar;
 import java.util.ArrayList;

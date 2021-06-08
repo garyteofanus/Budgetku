@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface KategoriRepository extends JpaRepository<Kategori, Long> {
-    Iterable<Kategori> findByUser(User user);
+    Iterable<Kategori> findAllByUser(User user);
 }

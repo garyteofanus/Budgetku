@@ -1,12 +1,12 @@
-package com.budgetku.core.budgetkuobserver;
+package com.budgetku.core.observer;
 
 import com.budgetku.model.Budget;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DanaKeluarSubscriber {
-    private List<Budget> budgetList = new ArrayList<>();
-    private DanaKeluarPublisher danaKeluarPublisher;
+    private final List<Budget> budgetList = new ArrayList<>();
+    private final DanaKeluarPublisher danaKeluarPublisher;
 
     public DanaKeluarSubscriber(DanaKeluarPublisher danaKeluarPublisher) {
         this.danaKeluarPublisher = danaKeluarPublisher;

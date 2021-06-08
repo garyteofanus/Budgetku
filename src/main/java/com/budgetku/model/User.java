@@ -19,15 +19,16 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
-@Table(name = "user_budget", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+@Table(name = "account", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 @Data
 @NoArgsConstructor
+@ToString
 public class User {
 
     @Id
-    @Column(name = "id", updatable = false, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
@@ -51,18 +52,17 @@ public class User {
     @JsonIgnore
     private List<Budget> budgetList;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(
-        name = "users_roles",
-        joinColumns = @JoinColumn(
-            name = "user_id", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(
-            name = "role_id", referencedColumnName = "id"))
-
-    private Collection<Role> roles;
-
-    @OneToMany(mappedBy = "user")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @JsonIgnore
     private List<Kategori> kategoriList;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "account_role",
+        joinColumns = @JoinColumn(name = "account_id"),
+        inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JsonIgnore
+    private Collection<Role> roles;
 
     /**
      * Constructor for User class.
