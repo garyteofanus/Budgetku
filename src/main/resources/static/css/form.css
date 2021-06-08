@@ -1,0 +1,30 @@
+body{
+    background-color: #C6FFC1;
+}
+@font-face {
+    font-family: Roboto;
+    src: url(https://fonts.googleapis.com/css2?family=Roboto&display=swap);
+}
+.row{
+    margin-top: 30px;
+    justify-content: center;
+}
+.col-md-6{
+    padding: 5%;
+    margin-bottom: 10%;
+    background: #FFFBDF;
+    border: 3px solid rgba(52, 101, 109, 0.2);
+    box-sizing: border-box;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+}
+h1{
+    text-align: center;
+    padding-top: 5%;
+    padding-bottom: 5% ;
+}
+.btn{
+    justify-content: right;
+    background: #368D9B;
+    margin-top: 5%;
+}

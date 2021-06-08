@@ -1,14 +1,15 @@
 package com.budgetku.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import javax.persistence.*;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -27,36 +28,31 @@ public class DanaKeluar {
     @Column(name = "nominal")
     private Integer nominal;
 
-    @Column(name = "tanggal")
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date tanggal;
-
     @Column(name = "deskripsi")
     private String deskripsi;
 
-    @ManyToOne
-    @JoinColumn(name = "kategori")
-    private Kategori kategori;
+    @Transient
+    private Budget budget;
 
     @ManyToOne
-    @JoinColumn(name = "user_budget")
+    @JoinColumn(name = "account_id")
     @JsonIgnore
     private User user;
 
-    public DanaKeluar(Integer nominal, Date tanggal, String deskripsi, User user) {
+    public DanaKeluar(Integer nominal, Budget budget, String deskripsi, User user) {
         super();
         this.nominal = nominal;
-        this.tanggal = tanggal;
+        this.budget = budget;
         this.deskripsi = deskripsi;
         this.user = user;
     }
 
-    public DanaKeluar(Integer nominal, String tanggal, String deskripsi) throws ParseException {
-        this(
-                nominal,
-                new SimpleDateFormat("yyyy-MM-dd").parse(tanggal),
-                deskripsi,
-                null
-        );
-    }
+//    public DanaKeluar(Integer nominal, String tanggal, String deskripsi) throws ParseException {
+//        this(
+//                nominal,
+//                new SimpleDateFormat("yyyy-MM-dd").parse(tanggal),
+//                deskripsi,
+//                null
+//        );
+//    }
 }
