@@ -1,13 +1,12 @@
 package com.budgetku.controller;
 
+import com.budgetku.model.DanaKeluar;
 import com.budgetku.service.DanaKeluarService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/danakeluar")
@@ -19,20 +18,12 @@ public class DanaKeluarController {
         this.danaKeluarService = danaKeluarService;
     }
 
-    @GetMapping
-    public String showDanaKeluarForm() {
-        return "danakeluar";
-    }
-
-    @PostMapping
-    public String makeNewDanaKeluar(
-        @RequestParam(value = "nominal") Integer nominal,
-        @RequestParam(value = "tanggal") String tanggal,
-        @RequestParam(value = "deskripsi") String deskripsi
-    ) {
+    @CrossOrigin(origins = "http://localhost:8080")
+    @PostMapping(path = "/create", produces = {"application/json"})
+    @ResponseBody
+    public ResponseEntity makeNewDanaKeluar(@RequestBody DanaKeluar danaKeluar) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userEmail = authentication.getName();
-        danaKeluarService.createDanaKeluar(nominal, tanggal, deskripsi, userEmail);
-        return "redirect:/danakeluar?success";
+        return ResponseEntity.ok(danaKeluarService.createDanaKeluar(danaKeluar, userEmail));
     }
 }
