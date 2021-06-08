@@ -1,6 +1,7 @@
 package com.budgetku.core.budgetkuobserver;
 
 import com.budgetku.model.Budget;
+import com.budgetku.budgetstate.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,10 +22,17 @@ public class DanaKeluarSubscriber {
         return this.budgetList;
     }
 
+    private void checkState(Budget budget) {
+        if (budget.getNominal() <= 0) {
+            budget.changeState(new NegativeBudgetState());
+        }
+    }
+
     public void update() {
         int nominalDanaKeluar = this.danaKeluarPublisher.getDanaKeluar().getNominal();
         for (Budget budget : budgetList) {
             budget.setNominal(budget.getNominal() - nominalDanaKeluar);
+            checkState(budget);
         }
     }
 }

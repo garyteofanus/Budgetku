@@ -36,7 +36,7 @@ public class BudgetController {
     @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping(path = "/list/{email}", produces = {"application/json"})
     @ResponseBody
-    public ResponseEntity<Iterable<Budget>> listBudget(@PathVariable(value = "email") String email) {
+    public ResponseEntity<Iterable<Map<Budget, String[]>>> listBudget(@PathVariable(value = "email") String email) {
         return ResponseEntity.ok(budgetService.getListBudgetByUser(email));
     }
 }

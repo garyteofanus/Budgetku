@@ -27,9 +27,12 @@ public class DanaKeluarServiceImplTest {
     @InjectMocks
     private DanaKeluarServiceImpl danaKeluarServiceImpl;
 
+    private User pengguna;
+    private DanaKeluar danaKeluar1;
+
     @BeforeEach
-    public void setUp(){
-        User pengguna = new User(
+    public void setUp() throws Exception {
+        pengguna = new User(
                 "nama depan",
                 "nama belakang",
                 "email@mail.com",
@@ -37,16 +40,16 @@ public class DanaKeluarServiceImplTest {
                 Collections.singleton(new Role("ROLE_USER"))
         );
         userRepository.save(pengguna);
+
+        danaKeluar1 = new DanaKeluar(
+                1000,
+                "2021-06-21",
+                "ini desc");
     }
 
     @Test
     public void testCreateDanaKeluar() {
-        danaKeluarServiceImpl.createDanaKeluar(
-                1000,
-                "07/05/2021 16:48",
-                "sebuah deskripsi",
-                "email@mail.com"
-        );
+        danaKeluarServiceImpl.createDanaKeluar(danaKeluar1, pengguna.getEmail());
         Assertions.assertTrue(true);
     }
 }

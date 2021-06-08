@@ -4,8 +4,6 @@ import com.budgetku.core.budgetkuobserver.DanaKeluarPublisher;
 import com.budgetku.model.DanaKeluar;
 
 public interface DanaKeluarService {
-    DanaKeluar createDanaKeluar(Integer nominal, String tanggal, String deskripsi,
-                                String userEmail);
-
+    DanaKeluar createDanaKeluar(DanaKeluar danaKeluar, String userEmail);
     DanaKeluarPublisher getDanaKeluarPublisher();
 }

@@ -15,8 +15,6 @@ import java.util.*;
 @Service
 public class BudgetServiceImpl implements BudgetService {
 
-    private BudgetState budgetState;
-
     @Autowired
     private final BudgetRepository budgetRepository;
 
@@ -29,7 +27,6 @@ public class BudgetServiceImpl implements BudgetService {
     private UserRepository userRepository;
 
     public BudgetServiceImpl(BudgetRepository budgetRepository, DanaKeluarService danaKeluarService) {
-        this.budgetState = new NormalBudgetState();
         this.budgetRepository = budgetRepository;
         this.danaKeluarService = danaKeluarService;
         this.danaKeluarSubscriber = new DanaKeluarSubscriber(this.danaKeluarService.getDanaKeluarPublisher());
@@ -40,11 +37,15 @@ public class BudgetServiceImpl implements BudgetService {
         return budgetRepository.findAll();
     }
 
-    public Iterable<Budget> getListBudgetByUser(String email) {
-        List<Budget> res = new ArrayList<>();
+    public Iterable<Map<Budget, String[]>> getListBudgetByUser(String email) {
+        List<Map<Budget, String[]>> res = new ArrayList<>();
+        // List<Budget> alt = new ArrayList<>();
         for (Budget budget: budgetRepository.findAll()) {
             if (budget.getUser().getEmail().equals(email)) {
-                res.add(budget);
+                res.add(new HashMap<Budget, String[]>() {{
+                    put(budget, new String[]{budget.getState().getSummary()});
+                }});
+                // alt.add(budget);
             }
         }
         return res;
@@ -72,11 +73,6 @@ public class BudgetServiceImpl implements BudgetService {
     @Override
     public void deleteBudgetById(int id) {
         budgetRepository.deleteById(id);
-    }
-
-    @Override
-    public String getSummary() {
-        return budgetState.getSummary();
     }
 }
 
