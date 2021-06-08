@@ -1,10 +1,7 @@
 package com.budgetku.config;
 
-import java.util.Arrays;
-
 import com.budgetku.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -35,12 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .cors()
             .and()
             .authorizeRequests()
-            .antMatchers(
-                    "/**")
-            // "/register**",
-            // "/js/**",
-            // "/css/**",
-            // "/img/**")
+            .antMatchers("/**")
             .permitAll()
             .anyRequest().authenticated()
             .and()
@@ -74,7 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("http://localhost:8080");
+                registry.addMapping("/**").allowedOrigins("*");
             }
         };
     }

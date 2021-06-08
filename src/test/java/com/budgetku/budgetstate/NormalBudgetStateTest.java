@@ -1,15 +1,17 @@
 package com.budgetku.budgetstate;
 
-//import static org.junit.Assert.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import com.budgetku.core.state.NormalBudgetState;
+import org.junit.jupiter.api.Test;
 
 public class NormalBudgetStateTest {
 
-    @Autowired
-    private NormalBudgetState mockNormalBudgetState;
+    private final NormalBudgetState mockNormalBudgetState = new NormalBudgetState();
 
-//    @Test
-//    public void getSummaryShouldReturnNormalBudgetStateSummary() {
-//        assertEquals("Current budget value is normal!", mockNormalBudgetState.getSummary());
-//    }
+    @Test
+    public void NormalBudgetStateGetSummaryShouldReturnNormalBudgetStateSummary() {
+        assertEquals("Current budget value is normal!",
+            mockNormalBudgetState.getSummary());
+    }
 }

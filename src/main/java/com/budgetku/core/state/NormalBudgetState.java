@@ -1,4 +1,4 @@
-package com.budgetku.budgetstate;
+package com.budgetku.core.state;
 
 public class NormalBudgetState implements BudgetState {
 

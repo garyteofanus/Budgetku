@@ -5,7 +5,6 @@ import java.util.Map;
 import com.budgetku.model.Budget;
 
 public interface BudgetService {
-    Iterable<Budget> getListBudget();
 
     Iterable<Map<Budget, String[]>> getListBudgetByUser(String email);
 

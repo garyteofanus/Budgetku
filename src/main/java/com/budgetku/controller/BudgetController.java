@@ -1,13 +1,16 @@
 package com.budgetku.controller;
 
 import com.budgetku.model.Budget;
+import com.budgetku.model.Kategori;
 import com.budgetku.model.User;
 import com.budgetku.service.BudgetService;
+import com.budgetku.service.KategoriService;
+import com.budgetku.service.UserService;
+import java.util.Date;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/budget")
 public class BudgetController {
@@ -24,16 +28,33 @@ public class BudgetController {
     @Autowired
     private BudgetService budgetService;
 
-    @CrossOrigin(origins = "http://localhost:8080")
-    @PostMapping(path = "/create", produces = {"application/json"})
+    @Autowired
+    private KategoriService kategoriService;
+
+    @Autowired
+    private UserService userService;
+
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/create/{email}",
+        produces = {"application/json"},
+        consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity createBudget(@RequestBody Budget budget) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userEmail = authentication.getName();
-        return ResponseEntity.ok(budgetService.createBudget(budget, userEmail));
+    public ResponseEntity<Budget> createBudget(
+        @RequestBody Map<String, String> payload,
+        @PathVariable("email") String email) {
+
+        Long nominal = Long.valueOf(payload.get("nominal"));
+        // Date tanggal = (Date) payload.get("tanggal");
+        String deskripsi = payload.get("deskripsi");
+        Kategori kategori =
+            kategoriService.getKategoriFromId(Long.valueOf(payload.get("kategori")));
+        User user = userService.getUserFromEmail(email);
+
+        Budget budget = new Budget(nominal, new Date(), deskripsi, kategori, user);
+        return ResponseEntity.ok(budgetService.createBudget(budget, email));
     }
 
-    @CrossOrigin(origins = "http://localhost:8080")
+    @CrossOrigin(origins = "*")
     @GetMapping(path = "/list/{email}", produces = {"application/json"})
     @ResponseBody
     public ResponseEntity<Iterable<Map<Budget, String[]>>> listBudget(@PathVariable(value = "email") String email) {
