@@ -2,6 +2,7 @@ package com.budgetku.controller;
 
 import com.budgetku.model.DanaKeluar;
 import com.budgetku.service.DanaKeluarService;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,11 +20,9 @@ public class DanaKeluarController {
     }
 
     @CrossOrigin(origins = "http://localhost:8080")
-    @PostMapping(path = "/create", produces = {"application/json"})
+    @PostMapping(path = "/create/{email}", produces = {"application/json"} ,consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity makeNewDanaKeluar(@RequestBody DanaKeluar danaKeluar) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userEmail = authentication.getName();
-        return ResponseEntity.ok(danaKeluarService.createDanaKeluar(danaKeluar, userEmail));
+    public ResponseEntity makeNewDanaKeluar(@PathVariable(value = "email") String email, @RequestBody DanaKeluar danaKeluar) {
+        return ResponseEntity.ok(danaKeluarService.createDanaKeluar(danaKeluar, email));
     }
 }
