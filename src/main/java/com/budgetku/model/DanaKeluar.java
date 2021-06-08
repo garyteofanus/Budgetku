@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -33,16 +34,13 @@ public class DanaKeluar {
     @Column(name = "deskripsi")
     private String deskripsi;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "danakel_kategori",
-            joinColumns = @JoinColumn(name = "budget_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "kategori_id", referencedColumnName = "id_kategori")
-    )
-    private List<Kategori> kategoriList;
+    @ManyToOne
+    @JoinColumn(name = "kategori")
+    private Kategori kategori;
 
     @ManyToOne
     @JoinColumn(name = "user_budget")
+    @JsonIgnore
     private User user;
 
     public DanaKeluar(Integer nominal, Date tanggal, String deskripsi, User user) {

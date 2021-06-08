@@ -1,15 +1,7 @@
 package com.budgetku.model;
 
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -37,6 +29,10 @@ public class Kategori {
     @JoinColumn(name = "user_budget")
     @JsonIgnore
     private User user;
+
+    @OneToMany(mappedBy = "kategori")
+    @JsonIgnore
+    private List<DanaKeluar> danaKeluarList;
 
     @ManyToMany(mappedBy = "kategoriList")
     private List<Budget> budgetList;
