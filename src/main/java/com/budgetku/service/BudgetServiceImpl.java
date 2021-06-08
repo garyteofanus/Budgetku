@@ -1,10 +1,14 @@
 package com.budgetku.service;
 
 import com.budgetku.core.observer.DanaKeluarSubscriber;
+import com.budgetku.core.state.NormalBudgetState;
 import com.budgetku.model.Budget;
 import com.budgetku.model.User;
 import com.budgetku.repository.BudgetRepository;
 import com.budgetku.repository.UserRepository;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,7 +37,9 @@ public class BudgetServiceImpl implements BudgetService {
     @Override
     public Iterable<Budget> getListBudgetByUser(String email) {
         List<Budget> res = new ArrayList<>();
+        System.out.println("Getting");
         for (Budget budget: budgetRepository.findAll()) {
+            System.out.println(budget.getState());
             if (budget.getUser().getEmail().equals(email)) {
                 res.add(budget);
             }
@@ -42,14 +48,21 @@ public class BudgetServiceImpl implements BudgetService {
     }
 
     @Override
-    public Iterable<Map<Budget, String[]>> getListBudgetAndStateByUser(String email) {
-        List<Map<Budget, String[]>> res = new ArrayList<>();
+    public ArrayList<ArrayList<Object>> getListBudgetAndStateByUser(String email) {
+        // ObjectMapper objectEntityMapper = new ObjectMapper();
+        // objectEntityMapper.registerModule(new Hibernate5Module());
+        // objectEntityMapper.setSerializationInclusion(Include.NON_NULL);
+
+        ArrayList<ArrayList<Object>> res = new ArrayList<ArrayList<Object>>();
+        System.out.println("Getting");
         for (Budget budget: budgetRepository.findAll()) {
+            System.out.println(budget.getState());
             if (budget.getUser().getEmail().equals(email)) {
-                System.out.println(budget.getState());
-                res.add(new HashMap<Budget, String[]>() {{
-                    put(budget, new String[]{budget.getState().getSummary(), budget.getState().getDeletable()});
-                }});
+                // if (budget.getState() == null) budget.changeState(new NormalBudgetState());
+                ArrayList<Object> inside = new ArrayList<>();
+                inside.add(budget);
+                inside.add(budget.getState().getSummary());
+                res.add(inside);
             }
         }
         return res;
@@ -60,6 +73,8 @@ public class BudgetServiceImpl implements BudgetService {
         User pengguna = userRepository.findByEmail(userEmail);
         budget.setUser(pengguna);
         budgetRepository.save(budget);
+        System.out.println("Adding");
+        System.out.println(budget.getState());
         return budget;
     }
 

@@ -1,13 +1,15 @@
 package com.budgetku.service;
 
 import com.budgetku.model.Budget;
+
+import java.util.ArrayList;
 import java.util.Map;
 
 public interface BudgetService {
 
     Iterable<Budget> getListBudgetByUser(String email);
 
-    Iterable<Map<Budget, String[]>> getListBudgetAndStateByUser(String email);
+    ArrayList<ArrayList<Object>> getListBudgetAndStateByUser(String email);
 
     Budget createBudget(Budget budget, String userEmail);
 
