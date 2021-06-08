@@ -51,7 +51,7 @@ public class BudgetServiceImpl implements BudgetService {
             if (budget.getUser().getEmail().equals(email)) {
                 System.out.println(budget.getState());
                 res.add(new HashMap<Budget, String[]>() {{
-                    put(budget, new String[]{budget.getState().getSummary()});
+                    put(budget, new String[]{budget.getState().getSummary(), budget.getState().getDeletable()});
                 }});
             }
         }

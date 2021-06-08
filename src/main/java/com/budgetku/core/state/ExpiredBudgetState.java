@@ -6,4 +6,15 @@ public class ExpiredBudgetState implements BudgetState {
     public String getSummary() {
         return "Budget has expired.";
     }
+
+    @Override
+    public String getUpdatable() {
+        return "unupdatable";
+    }
+
+    @Override
+    public String getDeletable() {
+        return "deletable";
+    }
+
 }

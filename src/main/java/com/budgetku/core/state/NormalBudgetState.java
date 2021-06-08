@@ -6,4 +6,15 @@ public class NormalBudgetState implements BudgetState {
     public String getSummary() {
         return "Budget still available";
     }
+
+    @Override
+    public String getUpdatable() {
+        return "updatable";
+    }
+
+    @Override
+    public String getDeletable() {
+        return "deletable";
+    }
+
 }
