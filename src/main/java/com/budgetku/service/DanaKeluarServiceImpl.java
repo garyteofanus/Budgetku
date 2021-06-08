@@ -1,6 +1,6 @@
 package com.budgetku.service;
 
-import com.budgetku.core.budgetkuobserver.DanaKeluarPublisher;
+import com.budgetku.core.observer.DanaKeluarPublisher;
 import com.budgetku.model.DanaKeluar;
 import com.budgetku.model.User;
 import com.budgetku.repository.DanaKeluarRepository;
