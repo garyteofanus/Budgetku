@@ -43,11 +43,11 @@ public class KategoriController {
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<Kategori> createKategori(
-            @RequestBody Map<String, String> payload,
+            @RequestBody Map<String, String> dataKategori,
             @PathVariable("email") String email) {
 
-        String nama = payload.get("nama");
-        String deskripsi = payload.get("deskripsi");
+        String nama = dataKategori.get("nama");
+        String deskripsi = dataKategori.get("deskripsi");
         User user = userService.getUserFromEmail(email);
 
         Kategori kategori = new Kategori(nama,deskripsi,user);
