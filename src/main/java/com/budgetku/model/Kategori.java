@@ -41,7 +41,6 @@ public class Kategori {
     private User user;
 
     @OneToMany(mappedBy = "kategori")
-  
     @JsonBackReference
     private List<Budget> budgetList;
 
