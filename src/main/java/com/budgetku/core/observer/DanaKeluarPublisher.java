@@ -3,20 +3,26 @@ package com.budgetku.core.observer;
 import com.budgetku.model.DanaKeluar;
 import java.util.ArrayList;
 
-// import org.springframework.stereotype.Component;
-
-// @Component
 public class DanaKeluarPublisher {
-    private final ArrayList<DanaKeluarSubscriber> subscribers = new ArrayList<>();
+    private ArrayList<DanaKeluarSubscriber> subscribers = new ArrayList<>();
     private DanaKeluar danaKeluar;
+    private String userEmail;
 
     public void addSubscriber(DanaKeluarSubscriber subscriber) {
         subscribers.add(subscriber);
     }
 
-    public void addDanaKeluar(DanaKeluar danaKeluar) {
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public void setDanaKeluar(DanaKeluar danaKeluar) {
         this.danaKeluar = danaKeluar;
         notifySubscriber();
+    }
+
+    public String getUserEmail() {
+        return userEmail;
     }
 
     public DanaKeluar getDanaKeluar() {
@@ -29,7 +35,7 @@ public class DanaKeluarPublisher {
 
     private void notifySubscriber() {
         for (DanaKeluarSubscriber subscriber : this.getSubscribers()) {
-            subscriber.update();
+            subscriber.update(this.getUserEmail());
         }
     }
 }

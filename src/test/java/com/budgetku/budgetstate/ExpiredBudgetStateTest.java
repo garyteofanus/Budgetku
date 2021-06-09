@@ -11,7 +11,7 @@ public class ExpiredBudgetStateTest {
 
     @Test
     public void ExpiredBudgetStateGetSummaryShouldReturnExpiredBudgetStateSummary() {
-        assertEquals("This budget has expired!",
+        assertEquals("Expired",
             mockExpiredBudgetState.getSummary());
     }
 }

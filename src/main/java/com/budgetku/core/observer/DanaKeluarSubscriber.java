@@ -1,39 +1,48 @@
 package com.budgetku.core.observer;
 
 import com.budgetku.model.Budget;
+import com.budgetku.repository.BudgetRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.budgetku.core.state.NegativeBudgetState;
+import com.budgetku.core.state.NormalBudgetState;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DanaKeluarSubscriber {
-    private final List<Budget> budgetList = new ArrayList<>();
+
+    @Autowired
+    private final BudgetRepository budgetRepository;
+
     private final DanaKeluarPublisher danaKeluarPublisher;
 
-    public DanaKeluarSubscriber(DanaKeluarPublisher danaKeluarPublisher) {
+    public DanaKeluarSubscriber(DanaKeluarPublisher danaKeluarPublisher, BudgetRepository budgetRepository) {
+        this.budgetRepository = budgetRepository;
         this.danaKeluarPublisher = danaKeluarPublisher;
         this.danaKeluarPublisher.addSubscriber(this);
     }
 
-    public void add(Budget budget) {
-        this.budgetList.add(budget);
-    }
-
-    public List<Budget> getBudgetList() {
-        return this.budgetList;
-    }
-
     private void checkState(Budget budget) {
+        System.out.println(budget.getNominal());
         if (budget.getNominal() <= 0) {
-            budget.changeState(new NegativeBudgetState());
+            budget.setState(new NegativeBudgetState());
+        } else if (budget.getNominal() > 0) {
+            budget.setState(new NormalBudgetState());
         }
     }
 
-    public void update() {
+    public void update(String userEmail) {
         int nominalDanaKeluar = this.danaKeluarPublisher.getDanaKeluar().getNominal();
-        for (Budget budget : budgetList) {
-            budget.setNominal(budget.getNominal() - nominalDanaKeluar);
-            checkState(budget);
+        Budget budgetDanaKeluar = this.danaKeluarPublisher.getDanaKeluar().getBudget();
+        for (Budget budget : budgetRepository.findAll()) {
+            if (budget.getUser().getEmail().equals(userEmail) && budget.equals(budgetDanaKeluar)) {
+                System.out.println(budget.getNominal());
+                System.out.println(nominalDanaKeluar);
+                budget.setNominal(budget.getNominal() - nominalDanaKeluar);
+                checkState(budget);
+            }
         }
     }
 }

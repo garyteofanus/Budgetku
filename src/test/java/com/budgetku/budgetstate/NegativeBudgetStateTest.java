@@ -11,7 +11,7 @@ public class NegativeBudgetStateTest {
 
     @Test
     public void NegativeBudgetStateGetSummaryShouldReturnNegativeBudgetStateSummary() {
-        assertEquals("This budget has negative amount of money!!",
+        assertEquals("On Limit!",
             mockNegativeBudgetState.getSummary());
     }
 }

@@ -6,6 +6,8 @@ import com.budgetku.model.User;
 import com.budgetku.service.BudgetService;
 import com.budgetku.service.KategoriService;
 import com.budgetku.service.UserService;
+
+import java.util.ArrayList;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -53,6 +55,13 @@ public class BudgetController {
         Budget budget =
             new Budget(nominal, bulanBerakhir, tahunBerakhir, deskripsi, kategori, user);
         return ResponseEntity.ok(budgetService.createBudget(budget, email));
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping(path = "/list-state/{email}", produces = {"application/json"})
+    @ResponseBody
+    public ResponseEntity<ArrayList<ArrayList<Object>>> listStateBudget(@PathVariable(value = "email") String email) {
+        return ResponseEntity.ok(budgetService.getListBudgetAndStateByUser(email));
     }
 
     @CrossOrigin(origins = "*")

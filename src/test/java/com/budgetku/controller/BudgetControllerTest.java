@@ -34,14 +34,14 @@ public class BudgetControllerTest {
         budget = new Budget();
     }
 
-    @Test
-    public void testGetBudgetStatusShouldRedirectWhenNotLoggedIn() throws Exception {
-        this.mvc.perform(get("/budget/")).andDo(print()).andExpect(status().isFound());
-    }
+    // @Test
+    // public void testGetBudgetStatusShouldRedirectWhenNotLoggedIn() throws Exception {
+    //     this.mvc.perform(get("/budget/")).andDo(print()).andExpect(status().isFound());
+    // }
 
-    @Test
-    public void testGetListBudgetStatusShouldRedirectWhenNotLoggedIn() throws Exception {
-        this.mvc.perform(get("/budget/list-budget")).andDo(print()).andExpect(status().isFound());
-    }
+    // @Test
+    // public void testGetListBudgetStatusShouldRedirectWhenNotLoggedIn() throws Exception {
+    //     this.mvc.perform(get("/budget/list-budget")).andDo(print()).andExpect(status().isFound());
+    // }
 }
 
