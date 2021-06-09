@@ -41,9 +41,8 @@ public class Kategori {
     private User user;
 
     @OneToMany(mappedBy = "kategori")
-    // Switch these 2 when adding kategori, and adding budget/adding pengeluaran
+  
     @JsonBackReference
-    // @JsonManagedReference
     private List<Budget> budgetList;
 
     public Kategori(String nama, String deskripsi, User user) {
