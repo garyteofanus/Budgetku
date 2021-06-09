@@ -25,10 +25,11 @@ public class DanaKeluarSubscriber {
     }
 
     private void checkState(Budget budget) {
+        System.out.println(budget.getNominal());
         if (budget.getNominal() <= 0) {
-            budget.changeState(new NegativeBudgetState());
+            budget.setState(new NegativeBudgetState());
         } else if (budget.getNominal() > 0) {
-            budget.changeState(new NormalBudgetState());
+            budget.setState(new NormalBudgetState());
         }
     }
 
@@ -37,6 +38,8 @@ public class DanaKeluarSubscriber {
         Budget budgetDanaKeluar = this.danaKeluarPublisher.getDanaKeluar().getBudget();
         for (Budget budget : budgetRepository.findAll()) {
             if (budget.getUser().getEmail().equals(userEmail) && budget.equals(budgetDanaKeluar)) {
+                System.out.println(budget.getNominal());
+                System.out.println(nominalDanaKeluar);
                 budget.setNominal(budget.getNominal() - nominalDanaKeluar);
                 checkState(budget);
             }
