@@ -1,7 +1,10 @@
 package com.budgetku.controller;
 
+import com.budgetku.model.Budget;
 import com.budgetku.model.Kategori;
+import com.budgetku.model.User;
 import com.budgetku.service.KategoriService;
+import com.budgetku.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,12 +17,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/kategori")
 public class KategoriController {
 
     @Autowired
     private KategoriService kategoriService;
+
+    @Autowired
+    private UserService userService;
 
     @CrossOrigin(origins = "*")
     @GetMapping(path = "/{email}", produces = {"application/json"})
@@ -29,15 +37,22 @@ public class KategoriController {
         return ResponseEntity.ok(kategoriService.getListKategoriByUser(email));
     }
 
-
     @CrossOrigin(origins = "*")
     @PostMapping(path = "/create/{email}",
-        produces = {"application/json"},
-        consumes = MediaType.APPLICATION_JSON_VALUE)
+            produces = {"application/json"},
+            consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<Kategori> createKategori(@PathVariable(value = "email") String email,
-                                                   @RequestBody Kategori kategori) {
+    public ResponseEntity<Kategori> createKategori(
+            @RequestBody Map<String, String> dataKategori,
+            @PathVariable("email") String email) {
+
+        String nama = dataKategori.get("nama");
+        String deskripsi = dataKategori.get("deskripsi");
+        User user = userService.getUserFromEmail(email);
+
+        Kategori kategori = new Kategori(nama,deskripsi,user);
         return ResponseEntity.ok(kategoriService.createKategori(kategori, email));
     }
+
 }
 

@@ -2,7 +2,6 @@ package com.budgetku.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -41,9 +40,7 @@ public class Kategori {
     private User user;
 
     @OneToMany(mappedBy = "kategori")
-    // Switch these 2 when adding kategori, and adding budget/adding pengeluaran
     @JsonBackReference
-    // @JsonManagedReference
     private List<Budget> budgetList;
 
     public Kategori(String nama, String deskripsi, User user) {
