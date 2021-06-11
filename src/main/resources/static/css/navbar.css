@@ -2,25 +2,25 @@ nav {
     background-color: #C6FFC1;
     padding: 3rem 6.25rem 0;
 }
- 
+
 a.linkNavbar {
     color: #334443 !important;
     background-color: transparent;
     text-decoration: none;
 }
- 
+
 nav a:hover {
     color: #334443 !important;
     background-color: transparent;
     text-decoration: none;
 }
- 
+
 nav a:active {
     color: #334443 !important;
     background-color: transparent;
     text-decoration: none;
 }
- 
+
 #items {
     display: flex;
     flex-direction: row;
@@ -28,7 +28,7 @@ nav a:active {
     align-items: center;
     justify-content: center;
 }
- 
+
 .navbar-brand {
     font-size: 2rem;
 }

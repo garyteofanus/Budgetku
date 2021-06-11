@@ -47,7 +47,9 @@ public class BudgetServiceImpl implements BudgetService {
     @Override
     public Iterable<Budget> getListBudgetByUser(String email) {
         List<Budget> res = new ArrayList<>();
+        System.out.println("Getting");
         for (Budget budget: budgetRepository.findAll()) {
+            System.out.println(budget.getState());
             if (budget.getUser().getEmail().equals(email)) {
                 res.add(budget);
             }
