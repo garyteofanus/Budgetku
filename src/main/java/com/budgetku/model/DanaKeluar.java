@@ -46,13 +46,4 @@ public class DanaKeluar {
         this.deskripsi = deskripsi;
         this.user = user;
     }
-
-//    public DanaKeluar(Integer nominal, String tanggal, String deskripsi) throws ParseException {
-//        this(
-//                nominal,
-//                new SimpleDateFormat("yyyy-MM-dd").parse(tanggal),
-//                deskripsi,
-//                null
-//        );
-//    }
 }

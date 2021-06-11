@@ -1,11 +1,10 @@
 package com.budgetku.controller;
 
-import com.budgetku.model.Budget;
 import com.budgetku.model.Kategori;
 import com.budgetku.model.User;
 import com.budgetku.service.KategoriService;
 import com.budgetku.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Map;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,17 +16,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
-
 @RestController
 @RequestMapping("/kategori")
 public class KategoriController {
 
-    @Autowired
-    private KategoriService kategoriService;
+    private final KategoriService kategoriService;
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    public KategoriController(KategoriService kategoriService, UserService userService) {
+        this.kategoriService = kategoriService;
+        this.userService = userService;
+    }
 
     @CrossOrigin(origins = "*")
     @GetMapping(path = "/{email}", produces = {"application/json"})

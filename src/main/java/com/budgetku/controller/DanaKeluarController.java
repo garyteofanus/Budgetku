@@ -40,8 +40,8 @@ public class DanaKeluarController {
         produces = {"application/json"},
         consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity makeNewDanaKeluar(@PathVariable(value = "email") String email,
-                                            @RequestBody Map<String, String> payload) {
+    public ResponseEntity<DanaKeluar> makeNewDanaKeluar(@PathVariable(value = "email") String email,
+                                                        @RequestBody Map<String, String> payload) {
 
         Integer nominal = Integer.valueOf(payload.get("nominal"));
         Budget budget = budgetService.getBudgetById(Long.valueOf(payload.get("budget")));

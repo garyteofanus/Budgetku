@@ -6,10 +6,8 @@ import com.budgetku.model.User;
 import com.budgetku.service.BudgetService;
 import com.budgetku.service.KategoriService;
 import com.budgetku.service.UserService;
-
 import java.util.ArrayList;
 import java.util.Map;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,14 +24,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/budget")
 public class BudgetController {
 
-    @Autowired
-    private BudgetService budgetService;
+    private final BudgetService budgetService;
 
-    @Autowired
-    private KategoriService kategoriService;
+    private final KategoriService kategoriService;
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    public BudgetController(BudgetService budgetService, KategoriService kategoriService,
+                            UserService userService) {
+        this.budgetService = budgetService;
+        this.kategoriService = kategoriService;
+        this.userService = userService;
+    }
 
     @CrossOrigin(origins = "*")
     @PostMapping(path = "/create/{email}",
