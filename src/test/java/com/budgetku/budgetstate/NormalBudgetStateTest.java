@@ -11,7 +11,7 @@ public class NormalBudgetStateTest {
 
     @Test
     public void NormalBudgetStateGetSummaryShouldReturnNormalBudgetStateSummary() {
-        assertEquals("Current budget value is normal!",
+        assertEquals("Available",
             mockNormalBudgetState.getSummary());
     }
 }
